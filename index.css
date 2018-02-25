@@ -1,0 +1,128 @@
+/*
+	Author: LAB
+	Styling for Pattar
+
+    LICENSE: MIT
+*/
+
+body {
+    font-family: 'Comfortaa', cursive;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    cursor: pointer;
+    /*box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);*/
+    background: black;
+}
+
+footer {
+    position: absolute;
+    color: white;
+    margin: 1em;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+footer h4, footer h5 {
+    display: inline-block;
+    background: black;
+    padding: 0.5em 1em;
+    margin-top: 0.1em;
+}
+.interactive {
+    pointer-events: auto;
+}
+
+#brand {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0.3em;
+    padding: 0 0.5em;
+    background: black;
+    color: white;
+}
+
+#brand, footer {
+    pointer-events: none;
+}
+
+#controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    pointer-events: none;
+}
+
+#controls button, #now-playing div {
+    margin-bottom: 0.1em;
+}
+
+.toggle-target {
+    transition: 0.2s;
+}
+
+.toggle-disabled {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-inline-row {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.margin-bottom {
+    margin-bottom: 0.2em;
+}
+
+.margin-right {
+    margin-right: 0.2em;
+}
+
+.generic-label {
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    height: 25px;
+}
+
+.generic-label span {
+    padding: 3px 1em;
+}

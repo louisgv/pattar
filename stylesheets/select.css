@@ -1,0 +1,64 @@
+/*
+	Author: LAB
+	Select styles
+
+    Adapted from https://codepen.io/gulshankumar/pen/ewmxC?depth=everything&order=popularity&page=7&q=select&show_forks=false
+
+    LICENSE: MIT
+*/
+
+.select-container {
+    position: relative;
+    display: inline-block;
+}
+
+.select-container:before {
+    content: '▼';
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    left: 0.25em;
+    top: 0.25em;
+    pointer-events: none;
+    z-index: 2;
+    border: none;
+}
+
+.select-container:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    background: black;
+    pointer-events: none;
+    display: block;
+    z-index: 1;
+    border: none;
+}
+
+.select-container select {
+    font-family: Comfortaa;
+    position: relative;
+    -webkit-appearance: none;
+
+    background: black;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 1em;
+
+    height: 25px;
+
+    padding: 0.2em 1em 0.2em 2em;
+    border: none;
+    cursor: pointer;
+}
+
+.select-container select:hover{
+    background: white;
+    color: black;
+
+}

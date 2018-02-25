@@ -1,0 +1,25 @@
+/*
+	Author: LAB
+	Button stylesheet
+
+    LICENSE: MIT
+*/
+
+.button {
+    font-family: Comfortaa;
+    min-width: 90px;
+    display: inline-block;
+    font-size: 1.44em;
+    padding: 3px 1em;
+    background: black;
+    color: white;
+    border: 1px solid black;
+    transition: 0.2s;
+}
+
+.button:hover {
+    cursor: pointer;
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
