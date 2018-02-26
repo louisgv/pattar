@@ -18,13 +18,25 @@ body {
     padding: 0;
 }
 
+#drawpad-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 canvas {
     position: absolute;
     width: 100vw;
     height: 100vh;
+}
+
+#main-canvas {
+    z-index: 0;
+}
+
+#draft-canvas {
     cursor: pointer;
-    /*box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);*/
-    background: black;
+    z-index: 1;
 }
 
 footer {

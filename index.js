@@ -9,13 +9,14 @@
 var app = app || {};
 (function() {
 
-    const {Main, Keyboard, Sound} = app;
+    const {Main, Drawpad, Keyboard, Sound} = app;
 
     const main = new Main();
 
     window.addEventListener('load', () => {
         main.sound = new Sound();
         main.keyboard = new Keyboard();
+        main.drawpad = new Drawpad();
 
         main.init();
     });

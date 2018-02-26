@@ -10,12 +10,13 @@
 var app = app || {};
 (function() {
 
-    const {Random, Interface, Global, Helper} = app;
+    const {Triangle, Random, Interface, Global, Helper} = app;
 
     app.Main = class {
         constructor() {
             this.sound = undefined;
             this.keyboard = undefined;
+            this.drawpad = undefined;
             this.animationID = 0;
             this.paused = false;
         }
@@ -55,6 +56,10 @@ var app = app || {};
         update() {
             // this schedules a call to the update() method in 1/60 seconds
             this.animationID = requestAnimationFrame(() => this.update());
+
+            // const triangle = new Triangle();
+            //
+            // triangle.draw(this.ctx);
 
         }
     };
