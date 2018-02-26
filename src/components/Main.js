@@ -10,7 +10,7 @@
 var app = app || {};
 (function() {
 
-    const {Triangle, Random, Interface, Global, Helper} = app;
+    const {Random, Interface, Global, Helper} = app;
 
     app.Main = class {
         constructor() {
@@ -57,10 +57,7 @@ var app = app || {};
             // this schedules a call to the update() method in 1/60 seconds
             this.animationID = requestAnimationFrame(() => this.update());
 
-            // const triangle = new Triangle();
-            //
-            // triangle.draw(this.ctx);
-
+            this.drawpad.render();
         }
     };
 }());
