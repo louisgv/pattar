@@ -2,14 +2,14 @@
 	Author: LAB
 	Drawpad module for pattar
 
-    LICENSE: GPLv3
+    LICENSE: MIT
 */
 
 // An IIFE ("Iffy") - see the notes in mycourses
 "use strict";
 var app = app || {};
 (function() {
-    const {Vector2, Triangle, Helper} = app;
+    const {Vector2, Triangle, ShapeGrid, Filter, Helper} = app;
 
     app.Drawpad = class {
         constructor() {
@@ -26,24 +26,38 @@ var app = app || {};
             this.container = document.querySelector('#drawpad-container');
 
             this.container.appendChild(this.mainCanvas);
-            this.container.appendChild(this.draftCanvas);
 
+            this.shapeGrid = new ShapeGrid();
+
+            this.filter = new Filter();
             this.setupCache();
         }
 
+        // Cache the size as well as update config for some child module
         setupCache() {
             this.draftCanvas.center = this.mainCanvas.center = new Vector2(window.innerWidth / 2, window.innerHeight / 2);
 
             // NOTE: Storing the half-size of the canvas into itself for reuse later.
             this.draftCanvas.width = this.mainCanvas.width = window.innerWidth;
             this.draftCanvas.height = this.mainCanvas.height = window.innerHeight;
+
+            const size = this.size = new Vector2(this.draftCanvas.width, this.draftCanvas.height);
+            const mid = this.mid = this.size.iMul(0.5);
+
+            this.shapeGrid.updateConfig(this.draftCanvas);
+            this.filter.updateConfig(this.draftCanvas, {size, mid});
         }
 
+        // Render the drawpad into the canvas's ctx
         render() {
-            const triangle = new Triangle(this.draftCanvas.center.copy(), 150);
+            // const triangle = new Triangle(this.draftCanvas.center.copy(), 20, -90 * Math.PI / 180);
+            //
+            // triangle.draw(this.draftCanvasCtx);
+            this.shapeGrid.draw(this.draftCanvasCtx);
+            this.filter.apply(this.draftCanvasCtx);
 
-            triangle.draw(this.draftCanvasCtx);
-
+            this.mainCanvasCtx.drawImage(this.draftCanvas, 0, 0);
+            Helper.clearCanvas(this.draftCanvasCtx);
         }
 
     };

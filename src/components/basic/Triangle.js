@@ -13,13 +13,19 @@ var app = app || {};
 (function() {
     const {Vector2} = app;
     app.Triangle = class {
-        constructor(pos = new Vector2(), size = 1) {
+        constructor(pos = new Vector2(), size = 1, rotation = 0) {
             this.pos = pos;
             this.size = size;
+            this.rotation = rotation;
         }
         // Set the size of the trangle
         setSize(size) {
             this.size = size;
+            return this;
+        }
+
+        setRotation(rotation) {
+            this.rotation = rotation;
             return this;
         }
 
@@ -29,11 +35,15 @@ var app = app || {};
 
             ctx.fillStyle = fillStyle;
             ctx.strokeStyle = strokeStyle;
-            
+
+            ctx.translate(this.pos.x, this.pos.y);
+
+            ctx.rotate(this.rotation);
+
             ctx.beginPath();
-            ctx.moveTo(this.pos.x, this.pos.y - this.size);
-            ctx.lineTo(this.pos.x - this.size, this.pos.y + this.size);
-            ctx.lineTo(this.pos.x + this.size, this.pos.y + this.size);
+            ctx.moveTo(0, -this.size);
+            ctx.lineTo(-this.size, this.size);
+            ctx.lineTo(this.size, this.size);
             ctx.closePath();
 
             if (fillStyle) {

@@ -1,22 +1,55 @@
 /*
 	Author: LAB
-	Drawpad module for pattar
+	Filter module for pattar
 
-    LICENSE: GPLv3
+    LICENSE: MIT
 */
 
 // An IIFE ("Iffy") - see the notes in mycourses
 "use strict";
 var app = app || {};
 (function() {
-    const {Helper} = app;
+    const {Vector2, FilterConfig, Helper} = app;
+
+    const {Kaleidoscope, Noise} = app.filter;
 
     app.Filter = class {
-        constructor() {}
+        constructor(config = {}) {
+            this.config = config;
+            this.kaleidoscope = new Kaleidoscope();
+            this.lightNoise = new Noise({value: 234});
 
+            this.filterList = FilterConfig.values;
+
+            // Render from bottom-up
+            this.filterInstances = this
+                .filterList
+                .map(fltr => {
+                    this[fltr].disabled = !FilterConfig.value[fltr][1];
+                    return this[fltr];
+                });
+        }
+
+        // Update config based on the canvas
+        updateConfig(canvas, {size, mid}) {
+            this.config.size = size || new Vector2(canvas.width, canvas.height);
+            this.config.mid = mid || this.config.size.iMul(0.5);
+        }
+
+        // Apply the filter into the ctx
         apply(ctx) {
-            const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-            ctx.putImageData(imageData, 0, 0);
+            this.imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+            for (let i = 0; i < this.filterInstances.length; i++) {
+                if (this.filterInstances[i].disabled) {
+                    continue;
+                }
+                this
+                    .filterInstances[i]
+                    .apply(this.imageData, this.config);
+            }
+
+            ctx.putImageData(this.imageData, 0, 0);
         }
 
     };

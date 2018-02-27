@@ -35,7 +35,9 @@ var app = app || {};
                 target.classList.toggle('toggle-disabled');
             });
         },
-
+        clamp(val, min, max) {
+            return Math.max(min, Math.min(max, val));
+        },
         // Return a random between min and max
         getRandomInt: (min, max) => Math.floor(Math.random() * (max - min) + min),
 

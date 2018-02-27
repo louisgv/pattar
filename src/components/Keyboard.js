@@ -2,7 +2,7 @@
 	Author: LAB
 	Keyboard module for pattar
 
-    LICENSE: GPLv3
+    LICENSE: MIT
 */
 
 // An IIFE ("Iffy") - see the notes in mycourses
