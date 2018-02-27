@@ -11,13 +11,9 @@ var app = app || {};
 (function() {
     const {Vector2, FilterConfig, Helper} = app;
 
-    const {Kaleidoscope, Noise} = app.filter;
-
     app.Filter = class {
         constructor(config = {}) {
             this.config = config;
-            this.kaleidoscope = new Kaleidoscope();
-            this.lightNoise = new Noise({value: 234});
 
             this.filterList = FilterConfig.values;
 
@@ -25,6 +21,8 @@ var app = app || {};
             this.filterInstances = this
                 .filterList
                 .map(fltr => {
+                    const [filterClass, defaultConfig] = FilterConfig.defaultValue[fltr];
+                    this[fltr] = new app.filter[filterClass](defaultConfig);
                     this[fltr].disabled = !FilterConfig.value[fltr][1];
                     return this[fltr];
                 });

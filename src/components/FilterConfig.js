@@ -23,10 +23,21 @@ var app = app || {};
         ],
     });
 
+    // Class - Default Config
+    const defaultValue = Object.seal({
+        'kaleidoscope': [
+            'Kaleidoscope'
+        ],
+        'lightNoise': [
+            'Noise', {value: 234}
+        ],
+    });
+
     const values = Object.keys(value);
 
     app.FilterConfig = {
         value,
         values,
+        defaultValue,
     };
 }());
