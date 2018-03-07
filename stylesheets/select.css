@@ -15,7 +15,7 @@
 .select-container:before {
     content: '▼';
     position: absolute;
-    color: white;
+    color: #333;
     font-weight: bold;
     font-size: 16px;
     left: 0.25em;
@@ -32,7 +32,7 @@
     top: 0;
     width: 25px;
     height: 25px;
-    background: black;
+    background: #eee;
     pointer-events: none;
     display: block;
     z-index: 1;
@@ -44,8 +44,8 @@
     position: relative;
     -webkit-appearance: none;
 
-    background: black;
-    color: white;
+    background: #eee;
+    color: #333;
     border: none;
     outline: none;
     font-size: 1em;
@@ -58,7 +58,7 @@
 }
 
 .select-container select:hover{
-    background: white;
-    color: black;
+    background: #333;
+    color: #eee;
 
 }

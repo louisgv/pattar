@@ -18,16 +18,16 @@
     cursor: pointer;
     font-size: 1em;
     user-select: none;
-    background: black;
-    color: white;
+    background: #eee;
+    color: #333;
     display: flex;
     height: 25px;
     align-items: center;
 }
 
 .checkbox:hover {
-    background: white;
-    color: black;
+    background: #333;
+    color: #eee;
 }
 
 /* Hide the browser's default checkbox */
@@ -44,7 +44,7 @@
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: white;
+    background-color: #eee;
 }
 
 /* On mouse-over, add a grey background color */
@@ -54,7 +54,7 @@
 
 /* When the checkbox is checked, add a blue background */
 .checkbox input:checked ~ .checkmark {
-    background-color: black;
+    background-color: #333;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -75,7 +75,7 @@
     top: 5px;
     width: 5px;
     height: 10px;
-    border: solid white;
+    border: solid #eee;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }

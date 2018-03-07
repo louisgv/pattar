@@ -58,7 +58,9 @@
 	<script src="./src/statics/Interface.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/FilterConfig.js"
-	        charset="utf-8"></script>
+		charset="utf-8"></script>
+	<script src="./src/components/PatternConfig.js"
+		charset="utf-8"></script>
 
 	<script src="./src/components/basic/Square.js"
 	        charset="utf-8"></script>
@@ -67,7 +69,12 @@
 	<script src="./src/components/basic/Triangle.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/basic/Diamond.js"
-	        charset="utf-8"></script>
+		charset="utf-8"></script>
+	
+	<script src="./src/components/FilterConfigUI.js"
+		charset="utf-8"></script>
+	<script src="./src/components/PatternConfigUI.js"
+		charset="utf-8"></script>
 
 	<script src="./src/components/complex/LineWave.js"
 	        charset="utf-8"></script>
@@ -80,15 +87,20 @@
 	<script src="./src/components/complex/MirrorWave.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/complex/PonchoEye.js"
-	        charset="utf-8"></script>
-	<script src="./src/components/complex/ShapeGrid.js"
-	        charset="utf-8"></script>
+		charset="utf-8"></script>
+		
+	<script src="./src/components/pattern/ShapeGrid.js"
+		charset="utf-8"></script>
+	<script src="./src/components/pattern/ShapeAltGrid.js"
+		charset="utf-8"></script>
 
 	<script src="./src/components/filter/Kaleidoscope.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/filter/Noise.js"
+		charset="utf-8"></script>
+		
+	<script src="./src/components/Pattern.js"
 	        charset="utf-8"></script>
-
 	<script src="./src/components/Filter.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/Keyboard.js"
@@ -117,7 +129,27 @@
 
 		<button id="toggleui-button"
 		        class="button interactive"
-		        title="Click to Toggle UI">x</button>
+			title="Click to Toggle UI">x</button>
+		
+		<div class="toggle-target interactive">
+			<div id="pattern-ui-config"
+				class="flex-column">
+				<label class="generic-label">
+					<span>
+						Pattern
+					</span>
+				</label>
+			</div>
+			
+			<div id="filter-ui-config"
+				class="flex-column">
+				<label class="generic-label">
+					<span>
+						Filter
+					</span>
+				</label>
+			</div>
+		</div>
 
 	</div>
 

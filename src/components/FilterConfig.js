@@ -10,8 +10,10 @@
 "use strict";
 var app = app || {};
 
-(function() {
-    const {Helper} = app;
+(function () {
+    const {
+        Helper
+    } = app;
 
     // Label - Enabled
     const value = Object.seal({
@@ -23,21 +25,33 @@ var app = app || {};
         ],
     });
 
+    const values = Object.keys(value);
+
     // Class - Default Config
     const defaultValue = Object.seal({
         'kaleidoscope': [
             'Kaleidoscope'
         ],
         'lightNoise': [
-            'Noise', {value: 234}
+            'Noise', {
+                value: 234
+            }
         ],
     });
 
-    const values = Object.keys(value);
+    // label - config - min - max
+    const slider = Object.seal({
+        'kaleidoscope': [
+            ['Split', 'power', 0, 5],
+            ['Angle','angle', 0, 360],
+        ],
+        'lightNoise' : [],
+    });
 
     app.FilterConfig = {
         value,
         values,
         defaultValue,
+        slider,
     };
 }());

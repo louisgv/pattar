@@ -11,15 +11,15 @@
     display: inline-block;
     font-size: 1.44em;
     padding: 3px 1em;
-    background: black;
-    color: white;
-    border: 1px solid black;
+    background: #EEE;
+    color: #333;
+    border: 1px solid #EEE;
     transition: 0.2s;
 }
 
 .button:hover {
     cursor: pointer;
-    background: white;
-    color: black;
-    border: 1px solid black;
+    background: #333;
+    color: #EEE;
+    border: 1px solid #EEE;
 }

@@ -18,5 +18,11 @@ app.Global = Object.freeze({
         KEY_DOWN: 40,
         KEY_SPACE: 32,
         KEY_SHIFT: 16
+    },
+    BASIC_SHAPE: {
+        Circle: 'Circle',
+        Square: 'Square',
+        Triangle: 'Triangle',
+        Diamond: 'Diamond'
     }
 });

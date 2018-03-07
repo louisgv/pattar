@@ -8,8 +8,18 @@
 // An IIFE ("Iffy") - see the notes in mycourses
 "use strict";
 var app = app || {};
-(function() {
-    const {Vector2, Triangle, ShapeGrid, Filter, Helper} = app;
+(function () {
+    const {
+        Vector2,
+        
+        Pattern,
+        Filter,
+
+        PatternConfigUI,
+        FilterConfigUI,
+        
+        Helper
+    } = app;
 
     app.Drawpad = class {
         constructor() {
@@ -27,9 +37,12 @@ var app = app || {};
 
             this.container.appendChild(this.mainCanvas);
 
-            this.shapeGrid = new ShapeGrid();
+            this.pattern = new Pattern();
+            this.patternConfigUI = new PatternConfigUI(this.pattern);
 
             this.filter = new Filter();
+            this.filterConfigUI = new FilterConfigUI(this.filter);
+
             this.setupCache();
         }
 
@@ -44,17 +57,35 @@ var app = app || {};
             const size = this.size = new Vector2(this.draftCanvas.width, this.draftCanvas.height);
             const mid = this.mid = this.size.iMul(0.5);
 
-            this.shapeGrid.updateConfig(this.draftCanvas);
-            this.filter.updateConfig(this.draftCanvas, {size, mid});
+            this.pattern.updateConfig(this.draftCanvas, {
+                size,
+                mid
+            });
+
+            this.filter.updateConfig(this.draftCanvas, {
+                size,
+                mid
+            });
+        }
+
+        /** Setup UI for the drawpad */
+        setupUI() {
+            this.patternConfigUI.mount(document.querySelector('#pattern-ui-config'), ()=>{
+                Helper.clearCanvas(this.mainCanvasCtx);
+                this.filter.refresh();
+            });
+
+            this.filterConfigUI.mount(document.querySelector('#filter-ui-config'), ()=> {
+                Helper.clearCanvas(this.mainCanvasCtx);
+                this.filter.refresh();
+            });
         }
 
         // Render the drawpad into the canvas's ctx
-        render() {
-            // const triangle = new Triangle(this.draftCanvas.center.copy(), 20, -90 * Math.PI / 180);
-            //
-            // triangle.draw(this.draftCanvasCtx);
-            this.shapeGrid.draw(this.draftCanvasCtx);
-            this.filter.apply(this.draftCanvasCtx);
+        render(dt) {
+            this.pattern.draw(this.draftCanvasCtx, dt);
+
+            this.filter.draw(this.draftCanvasCtx, dt);
 
             this.mainCanvasCtx.drawImage(this.draftCanvas, 0, 0);
             Helper.clearCanvas(this.draftCanvasCtx);

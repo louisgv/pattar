@@ -24,7 +24,10 @@ app.DropZone = {
             e.stopPropagation(); // Stops some browsers from redirecting.
             e.preventDefault();
 
-            const {x, y} = e;
+            const {
+                x,
+                y
+            } = e;
 
             const fileBlob = e.dataTransfer.files[0];
 
@@ -32,12 +35,15 @@ app.DropZone = {
                 return;
             }
 
-			// if (!fileBlob.type.match('audio.*')) {
-			// 	return;
-			// }
+            // if (!fileBlob.type.match('audio.*')) {
+            // 	return;
+            // }
 
             // If not image ignore
-            callback(fileBlob, {x, y});
+            callback(fileBlob, {
+                x,
+                y
+            });
         }, false);
     }
 };

@@ -2,7 +2,6 @@
 	Author: LAB
 
 	Shape grid module
-    Used to draw triangle grid
 
     LICENSE: MIT
 */
@@ -10,13 +9,17 @@
 "use strict";
 var app = app || {};
 
-(function() {
-    const {Vector2} = app;
+(function () {
+    const {
+        Vector2
+    } = app;
 
-    app.ShapeGrid = class {
+    app.pattern = app.pattern || {};
+
+    app.pattern.ShapeAltGrid = class {
         constructor(config = {
             size: 10,
-            shape: 'Triangle',
+            shape: 'Square',
             fill: false
         }) {
             this.config = config;
@@ -32,10 +35,10 @@ var app = app || {};
 
             this.config.doubleSize = this.config.size * 2;
 
-            this.updateShapeCache();
+            this.updateCache();
         }
 
-        updateShapeCache() {
+        updateCache() {
             this.shapeCache = new Array(this.config.xCount);
 
             for (let x = 0; x < this.config.xCount; x++) {
@@ -51,8 +54,7 @@ var app = app || {};
                 for (let y = 1; y < this.config.yCount; y += 2) {
                     this.shapeCache[x][y] = new app[this.config.shape](
                         new Vector2(x * this.config.doubleSize + this.config.size, y * this.config.doubleSize + this.config.size),
-                        this.config.size,
-                        -Math.PI / 2
+                        this.config.size, -Math.PI / 2
                     );
                 }
             }
@@ -63,7 +65,7 @@ var app = app || {};
             ctx.save();
 
             for (let x = 0; x < this.config.xCount; x++) {
-                for (let y = 0; y < this.config.yCount; y += 1) {
+                for (let y = 0; y < this.config.yCount; y++) {
                     this
                         .shapeCache[x][y]
                         .draw(ctx);

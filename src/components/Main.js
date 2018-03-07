@@ -8,9 +8,14 @@
 // An IIFE ("Iffy") - see the notes in mycourses
 "use strict";
 var app = app || {};
-(function() {
+(function () {
 
-    const {Random, Interface, Global, Helper} = app;
+    const {
+        Random,
+        Interface,
+        Global,
+        Helper
+    } = app;
 
     app.Main = class {
         constructor() {
@@ -21,6 +26,9 @@ var app = app || {};
             this.paused = false;
         }
 
+        /** Setup the main process and start animation
+         * 
+         */
         init() {
             this.setupUI();
 
@@ -28,6 +36,9 @@ var app = app || {};
             this.update();
         }
 
+        /** Halt the program
+         * 
+         */
         halt() {
             this.paused = true;
             cancelAnimationFrame(this.animationID);
@@ -35,6 +46,8 @@ var app = app || {};
 
         }
 
+        /** Resume the application
+         */
         resume() {
             cancelAnimationFrame(this.animationID);
             this.paused = false;
@@ -42,10 +55,16 @@ var app = app || {};
 
         }
 
+        /** Setup any caching layer of any module it depends on.
+         * 
+         */
         setupCache() {
             this.drawpad.setupCache();
         }
 
+        /** UI Setup for the main application
+         * 
+         */
         setupUI() {
             const toggleUIButton = document.querySelector('#toggleui-button');
             toggleUIButton.addEventListener('click', Helper.toggleUIElement);
@@ -53,8 +72,13 @@ var app = app || {};
             setTimeout(() => {
                 toggleUIButton.dispatchEvent(new Event('click'));
             }, 900);
+
+            this.drawpad.setupUI();
         }
 
+        /** Update loop for animation
+         * 
+         */
         update() {
             // this schedules a call to the update() method in 1/60 seconds
             this.animationID = requestAnimationFrame(() => this.update());
@@ -65,10 +89,12 @@ var app = app || {};
 
             let dt = this.getDeltaTime();
 
-            this.drawpad.render();
+            this.drawpad.render(dt);
         }
 
-        // Calculate the delta time
+        /** Calculate the delta time
+         * 
+        */
         getDeltaTime() {
             const now = performance.now();
             let fps = 1000 / (now - this.lastTime);

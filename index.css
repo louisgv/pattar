@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Comfortaa', cursive;
-    background: white;
+    background: #eee;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,7 +41,8 @@ canvas {
 
 footer {
     position: absolute;
-    color: white;
+    background: #eee;
+    color: #333;
     margin: 1em;
     bottom: 0;
     left: 0;
@@ -52,7 +53,8 @@ footer {
 
 footer h4, footer h5 {
     display: inline-block;
-    background: black;
+    background: #eee;
+    color: #333;
     padding: 0.5em 1em;
     margin-top: 0.1em;
 }
@@ -66,8 +68,8 @@ footer h4, footer h5 {
     right: 0;
     margin: 0.3em;
     padding: 0 0.5em;
-    background: black;
-    color: white;
+    background: #eee;
+    color: #333;
 }
 
 #brand, footer {
@@ -130,8 +132,8 @@ footer h4, footer h5 {
 }
 
 .generic-label {
-    background: black;
-    color: white;
+    background: #eee;
+    color: #333;
     display: flex;
     justify-content: center;
     height: 25px;

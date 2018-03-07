@@ -10,8 +10,10 @@
 "use strict";
 var app = app || {};
 
-(function() {
-    const {Random} = app;
+(function () {
+    const {
+        Random
+    } = app;
 
     app.filter = app.filter || {};
 
@@ -21,9 +23,12 @@ var app = app || {};
         }) {
             this.config = config;
         }
-
+        refresh() {}
+        
         // Apply the filter effect
-        apply({data}, opt) {
+        draw({
+            data
+        }, opt) {
             for (let i = 0; i < data.length; i += 4) {
                 if (Random.next() > 0.90) {
                     data[i] = data[i + 1] = data[i + 2] = this.config.value;

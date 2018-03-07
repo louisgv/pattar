@@ -34,18 +34,23 @@ var app = app || {};
             this.config.mid = mid || this.config.size.iMul(0.5);
         }
 
-        // Apply the filter into the ctx
-        apply(ctx) {
+        /** Refresh instance for redraw scheduling */
+        refresh() {
+            this.filterInstances.forEach(instance => {
+                instance.refresh();
+            });
+        }
+
+        // Draw the filter into the ctx
+        draw(ctx, dt) {
             this.imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-            for (let i = 0; i < this.filterInstances.length; i++) {
-                if (this.filterInstances[i].disabled) {
-                    continue;
+            this.filterInstances.forEach(instance => {
+                if (instance.disabled) {
+                    return;
                 }
-                this
-                    .filterInstances[i]
-                    .apply(this.imageData, this.config);
-            }
+                instance.draw(this.imageData, this.config, dt);
+            });
 
             ctx.putImageData(this.imageData, 0, 0);
         }

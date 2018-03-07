@@ -12,21 +12,36 @@
 "use strict";
 var app = app || {};
 
-(function() {
-    const {Vector2, FilterHelper, Helper} = app;
+(function () {
+    const {
+        Vector2,
+        FilterHelper,
+        Helper
+    } = app;
     app.filter = app.filter || {};
 
     app.filter.Kaleidoscope = class {
         constructor(config = {
-            rotation: 0,
             power: 3,
             angle: 0,
+            timeout: 30
         }) {
             this.config = config;
+            this.currentTime = config.timeout;
+        }
+
+        refresh() {
+            this.currentTime = this.config.timeout;
         }
 
         // Apply the filter effect
-        apply(imageData, opt) {
+        draw(imageData, opt, dt) {
+            if(this.currentTime < this.config.timeout) {
+                this.currentTime += dt;
+                return;
+            }
+            this.currentTime = 0;
+
             const size = opt.size || new Vector2(imageData.width, imageData.height);
             const mid = opt.mid || new Vector2(size.x / 2, size.y / 2);
 
@@ -50,7 +65,10 @@ var app = app || {};
             let scratchData = tempCanvas.getContext('2d').getImageData(0, 0, size.x, size.y);
 
             // Convert thhe original to polar coordinates
-            FilterHelper.toPolar(imageData, scratchData, {mid, size});
+            FilterHelper.toPolar(imageData, scratchData, {
+                mid,
+                size
+            });
 
             // Determine how big each section will be, if it's too small
             // make it bigger
