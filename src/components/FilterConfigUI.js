@@ -33,6 +33,8 @@ var app = app || {};
 
             const filterToggleEl = Interface.generateCheckBox(label, f, (e) => {
                 instance.disabled = !e.target.checked;
+
+                onChange();
             }, !!isEnabled, 'margin-right');
 
             bodyEl.appendChild(filterToggleEl);
