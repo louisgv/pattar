@@ -11,6 +11,8 @@
 var app = app || {};
 
 app.Global = Object.freeze({
+    HALF_PI: Math.PI / 2,
+    TWO_PI: Math.PI * 2,
     KEYBOARD: {
         KEY_LEFT: 37,
         KEY_UP: 38,

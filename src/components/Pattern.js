@@ -33,13 +33,7 @@ var app = app || {};
         }
 
         // Update config based on the canvas
-        updateConfig(canvas, {
-            size,
-            mid
-        }) {
-            this.config.size = size || new Vector2(canvas.width, canvas.height);
-            this.config.mid = mid || this.config.size.iMul(0.5);
-
+        updateConfig(canvas) {
             this.patternInstances.forEach(instance => {
                 instance.updateConfig(canvas);
             });

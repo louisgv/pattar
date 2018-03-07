@@ -2,7 +2,7 @@
 	Author: LAB
 
 	Noise module
-    Used to apply Noise filter to image
+    Used to apply Noise effect to image
 
     LICENSE: MIT
 */
@@ -15,9 +15,9 @@ var app = app || {};
         Random
     } = app;
 
-    app.filter = app.filter || {};
+    app.effect = app.effect || {};
 
-    app.filter.Noise = class {
+    app.effect.Noise = class {
         constructor(config = {
             value: 255
         }) {

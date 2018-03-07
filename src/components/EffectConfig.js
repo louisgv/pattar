@@ -17,26 +17,28 @@ var app = app || {};
 
     // Label - Enabled
     const value = Object.seal({
-        'kaleidoscope': [
-            'Kaleidoscope', true
-        ]
+        'lightNoise': [
+            'Light Noise'
+        ],
     });
 
     const values = Object.keys(value);
 
     // Class - Default Config
     const defaultValue = Object.seal({
-        'kaleidoscope': [
-            'Kaleidoscope',
-        ]
+        'lightNoise': [
+            'Noise', {
+                value: 234
+            }
+        ],
     });
 
     // label - config - min - max
     const slider = Object.seal({
-        'kaleidoscope': []
+        'lightNoise' : [],
     });
 
-    app.FilterConfig = {
+    app.EffectConfig = {
         value,
         values,
         defaultValue,

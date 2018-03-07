@@ -19,7 +19,6 @@ var app = app || {};
         constructor(config = {
             size: 10,
             shape: 'Square',
-            fill: false
         }) {
             this.config = config;
             this.shapeCache = [];

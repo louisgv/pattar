@@ -9,47 +9,49 @@
 "use strict";
 var app = app || {};
 (function() {
-    const {Vector2, FilterConfig, Helper} = app;
+    const {Vector2, EffectConfig, Helper} = app;
 
-    app.Filter = class {
+    app.Effect = class {
         constructor(config = {}) {
             this.config = config;
 
-            this.filterList = FilterConfig.values;
+            this.filterList = EffectConfig.values;
 
             // Render from bottom-up
-            this.filterInstances = this
+            this.effectInstances = this
                 .filterList
                 .map(fltr => {
-                    const [filterClass, defaultConfig] = FilterConfig.defaultValue[fltr];
-                    this[fltr] = new app.filter[filterClass](defaultConfig);
-                    this[fltr].disabled = !FilterConfig.value[fltr][1];
+                    const [effectClass, defaultConfig] = EffectConfig.defaultValue[fltr];
+                    this[fltr] = new app.effect[effectClass](defaultConfig);
+                    this[fltr].disabled = !EffectConfig.value[fltr][1];
                     return this[fltr];
                 });
         }
 
         // Update config based on the canvas
         updateConfig(canvas) {
-            this.filterInstances.forEach(instance => {
-                instance.updateConfig(canvas);
-            });
+            
         }
 
         /** Refresh instance for redraw scheduling */
         refresh() {
-            this.filterInstances.forEach(instance => {
+            this.effectInstances.forEach(instance => {
                 instance.refresh();
             });
         }
 
         // Draw the filter into the ctx
         draw(ctx, dt) {
-            this.filterInstances.forEach(instance => {
+            this.imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+            this.effectInstances.forEach(instance => {
                 if (instance.disabled) {
                     return;
                 }
-                instance.draw(ctx, dt);
+                instance.draw(this.imageData, this.config, dt);
             });
+
+            ctx.putImageData(this.imageData, 0, 0);
         }
 
     };

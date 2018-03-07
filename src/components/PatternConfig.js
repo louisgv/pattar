@@ -23,7 +23,10 @@ var app = app || {};
     // Class - Default Config
     const defaultValue = Object.seal({
         'shapeGrid': [
-            'ShapeGrid'
+            'ShapeGrid', {
+                size: 10,
+                shape: 'Diamond',
+            }
         ],
     });
 
