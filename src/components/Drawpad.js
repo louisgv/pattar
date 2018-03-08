@@ -11,13 +11,13 @@ var app = app || {};
 (function () {
     const {
         Vector2,
-        
+
         Pattern,
         Filter,
 
         PatternConfigUI,
         FilterConfigUI,
-        
+
         Helper
     } = app;
 
@@ -51,7 +51,7 @@ var app = app || {};
         setupCache() {
             this.draftCanvas.size = this.mainCanvas.size = new Vector2(window.innerWidth, window.innerHeight);
             this.draftCanvas.center = this.mainCanvas.center = this.mainCanvas.size.iMul(0.5);
-            
+
 
             // NOTE: Storing the half-size of the canvas into itself for reuse later.
             this.draftCanvas.width = this.mainCanvas.width = window.innerWidth;
@@ -64,49 +64,51 @@ var app = app || {};
 
         /** Setup UI for the drawpad */
         setupUI() {
-            this.patternConfigUI.mount(document.querySelector('#pattern-ui-config'), ()=>{
+            this.patternConfigUI.mount(document.querySelector('#pattern-ui-config'), () => {
                 Helper.clearCanvas(this.mainCanvasCtx);
                 this.filter.refresh();
             });
 
-            this.filterConfigUI.mount(document.querySelector('#filter-ui-config'), ()=> {
+            this.filterConfigUI.mount(document.querySelector('#filter-ui-config'), () => {
                 Helper.clearCanvas(this.mainCanvasCtx);
                 this.filter.refresh();
             });
 
-            this.draftCanvas.addEventListener('mousedown', (e)=> this.onMouseDownDraftCanvas(e));
-            this.draftCanvas.addEventListener('mousemove', (e)=>onMouseMoveDraftCanvas(e));
-            this.draftCanvas.addEventListener('mouseup', (e)=>onMouseUpDraftCanvas(e));
-            this.draftCanvas.addEventListener('mouseout', (e)=>onMouseOutDraftCanvas(e));
+            this.mainCanvas.addEventListener('mousedown', (e) => this.onMouseDownCanvas(e));
+            this.mainCanvas.addEventListener('mousemove', (e) => this.onMouseMoveCanvas(e));
+            this.mainCanvas.addEventListener('mouseup', (e) => this.onMouseUpCanvas(e));
+            this.mainCanvas.addEventListener('mouseout', (e) => this.onMouseOutCanvas(e));
         }
 
-        onMouseDownDraftCanvas(e) {
+        onMouseDownCanvas(e) {
             this.dragging = true;
-    
+
             // const mouse = Helper.getMouse(e);
         }
-    
-        onMouseMoveDraftCanvas(e) {
+
+        onMouseMoveCanvas(e) {
+            Helper.clearCanvas(this.mainCanvasCtx);
+
+            this.filter.kaleidoscope.updateConfigOnMouseEvent(e);
+
             if (!this.dragging) {
                 return;
             }
-    
-            const mouse = Helper.getMouse(e);
 
-            this.filter.kaleidoscope.updateConfigOnMouseEvent(e);
+            const mouse = Helper.getMouse(e);
         }
-    
-        onMouseUpDraftCanvas(e) {
-    
+
+        onMouseUpCanvas(e) {
+
             this.dragging = false;
         }
-    
+
         // if the user drags out of the canvas
-        onMouseOutDraftCanvas(e) {
-    
+        onMouseOutCanvas(e) {
+
             this.dragging = false;
         }
-    
+
         // Render the drawpad into the canvas's ctx
         render(dt) {
             this.pattern.draw(this.draftCanvasCtx, dt);

@@ -27,7 +27,7 @@ var app = app || {};
         }
 
         /** Setup the main process and start animation
-         * 
+         *
          */
         init() {
             this.setupUI();
@@ -37,7 +37,7 @@ var app = app || {};
         }
 
         /** Halt the program
-         * 
+         *
          */
         halt() {
             this.paused = true;
@@ -56,14 +56,14 @@ var app = app || {};
         }
 
         /** Setup any caching layer of any module it depends on.
-         * 
+         *
          */
         setupCache() {
             this.drawpad.setupCache();
         }
 
         /** UI Setup for the main application
-         * 
+         *
          */
         setupUI() {
             const toggleUIButton = document.querySelector('#toggleui-button');
@@ -77,7 +77,7 @@ var app = app || {};
         }
 
         /** Update loop for animation
-         * 
+         *
          */
         update() {
             // this schedules a call to the update() method in 1/60 seconds
@@ -93,7 +93,7 @@ var app = app || {};
         }
 
         /** Calculate the delta time
-         * 
+         *
         */
         getDeltaTime() {
             const now = performance.now();

@@ -26,10 +26,10 @@ var app = app || {};
             offsetScale: 1.0,
             offsetX: 0.0,
             offsetY: 0.0,
-            radius: 260,
+            radius: 450,
             slices: 23,
             zoom: 1.0,
-            timeout: 0.5,
+            timeout: 0,
             ease: 0.1
         }) {
             this.config = config;
@@ -38,9 +38,11 @@ var app = app || {};
 
         /** Update config based on canvas */
         updateConfig(canvas) {
+            this.config.radius = Math.min(canvas.center.x * 2 / 3, canvas.center.y * 2 / 3);
+
             this.config.scale = this.config.zoom * (this.config.radius / Math.min(canvas.width, canvas.height));
 
-            this.config.center = canvas.center;            
+            this.config.center = canvas.center;
 
             this.config.step = Global.TWO_PI / this.config.slices;
         }
@@ -51,13 +53,13 @@ var app = app || {};
 
             const hx = dx - 0.5;
             const hy = dy - 0.5;
-            
+
             const tx = hx * this.config.radius * -2;
             const ty = hy * this.config.radius * 2;
             const tr = Math.atan2(hy, hx);
-            
+
             const delta = tr - this.config.offsetRotation;
-            const thetea = Math.atan2(Math.sin(delta), Math.cos(delta));
+            const theta = Math.atan2(Math.sin(delta), Math.cos(delta));
 
             this.config.offsetX += (tx - this.config.offsetX) * this.config.ease;
             this.config.offsetY += (ty - this.config.offsetY) * this.config.ease;
@@ -65,13 +67,14 @@ var app = app || {};
             this.config.offsetRotation += (theta - this.config.offsetRotation) * this.config.ease;
         }
 
+        // Refresh timeout
         refresh() {
             this.currentTime = this.config.timeout;
         }
 
         // Apply the filter effect
         draw(ctx, dt) {
-            if(this.currentTime < this.config.timeout) {
+            if (this.currentTime < this.config.timeout) {
                 this.currentTime += dt;
                 return;
             }
@@ -91,22 +94,22 @@ var app = app || {};
                 ctx.beginPath();
 
                 ctx.moveTo(-0.5, -0.5);
-                ctx.arc(0,0,this.config.radius, this.config.step * -0.51, this.config.step * 0.51);
+                ctx.arc(0, 0, this.config.radius, this.config.step * -0.51, this.config.step * 0.51);
                 ctx.lineTo(0.5, 0.5);
                 ctx.closePath();
 
                 ctx.rotate(Global.HALF_PI);
                 ctx.scale(this.config.scale, this.config.scale);
-                
-                ctx.scale([-1,1][index % 2], 1);
+
+                ctx.scale([-1, 1][index % 2], 1);
 
                 ctx.translate(this.config.offsetX - this.config.center.x, this.config.offsetY);
-                
+
                 ctx.rotate(this.config.offsetRotation);
                 ctx.scale(this.config.offsetScale, this.config.offsetScale);
-                
+
                 ctx.fill();
-                
+
                 ctx.restore();
             }
 
