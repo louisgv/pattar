@@ -24,60 +24,57 @@ var app = app || {};
     app.Drawpad = class {
         constructor() {
             this.dragging = false;
-            this.mainCanvas = Helper.createElement(`
+            this.renderCanvas = Helper.createElement(`
                 <canvas id="main-canvas"></canvas>
             `);
-            this.mainCanvasCtx = this.mainCanvas.getContext('2d');
-
-            this.draftCanvas = Helper.createElement(`
-                <canvas id="draft-canvas"></canvas>
-            `);
-            this.draftCanvasCtx = this.draftCanvas.getContext('2d');
+            this.renderCanvasCtx = this.renderCanvas.getContext('2d');
 
             this.container = document.querySelector('#drawpad-container');
 
-            this.container.appendChild(this.mainCanvas);
+            this.container.appendChild(this.renderCanvas);
 
             this.pattern = new Pattern();
             this.patternConfigUI = new PatternConfigUI(this.pattern);
+            this.patternCtx = Helper.createCtx();
 
             this.filter = new Filter();
             this.filterConfigUI = new FilterConfigUI(this.filter);
+            this.filterCtx = Helper.createCtx();
 
             this.setupCache();
         }
 
         // Cache the size as well as update config for some child module
         setupCache() {
-            this.draftCanvas.size = this.mainCanvas.size = new Vector2(window.innerWidth, window.innerHeight);
-            this.draftCanvas.center = this.mainCanvas.center = this.mainCanvas.size.iMul(0.5);
+            this.renderCanvas.size = new Vector2(window.innerWidth, window.innerHeight);
+            this.renderCanvas.center = this.renderCanvas.size.iMul(0.5);
 
 
-            // NOTE: Storing the half-size of the canvas into itself for reuse later.
-            this.draftCanvas.width = this.mainCanvas.width = window.innerWidth;
-            this.draftCanvas.height = this.mainCanvas.height = window.innerHeight;
+            Helper.setFullsizeCtx(this.patternCtx);
+            Helper.setFullsizeCtx(this.filterCtx);
+            Helper.setFullsizeCtx(this.renderCanvasCtx);
 
-            this.pattern.updateConfig(this.draftCanvas);
+            this.pattern.updateConfig(this.renderCanvas);
 
-            this.filter.updateConfig(this.draftCanvas);
+            this.filter.updateConfig(this.renderCanvas);
         }
 
         /** Setup UI for the drawpad */
         setupUI() {
             this.patternConfigUI.mount(document.querySelector('#pattern-ui-config'), () => {
-                Helper.clearCanvas(this.mainCanvasCtx);
+                Helper.clearCanvas(this.renderCanvasCtx);
                 this.filter.refresh();
             });
 
             this.filterConfigUI.mount(document.querySelector('#filter-ui-config'), () => {
-                Helper.clearCanvas(this.mainCanvasCtx);
+                Helper.clearCanvas(this.renderCanvasCtx);
                 this.filter.refresh();
             });
 
-            this.mainCanvas.addEventListener('mousedown', (e) => this.onMouseDownCanvas(e));
-            this.mainCanvas.addEventListener('mousemove', (e) => this.onMouseMoveCanvas(e));
-            this.mainCanvas.addEventListener('mouseup', (e) => this.onMouseUpCanvas(e));
-            this.mainCanvas.addEventListener('mouseout', (e) => this.onMouseOutCanvas(e));
+            this.renderCanvas.addEventListener('mousedown', (e) => this.onMouseDownCanvas(e));
+            this.renderCanvas.addEventListener('mousemove', (e) => this.onMouseMoveCanvas(e));
+            this.renderCanvas.addEventListener('mouseup', (e) => this.onMouseUpCanvas(e));
+            this.renderCanvas.addEventListener('mouseout', (e) => this.onMouseOutCanvas(e));
         }
 
         onMouseDownCanvas(e) {
@@ -87,7 +84,7 @@ var app = app || {};
         }
 
         onMouseMoveCanvas(e) {
-            Helper.clearCanvas(this.mainCanvasCtx);
+            Helper.clearCanvas(this.renderCanvasCtx);
 
             this.filter.kaleidoscope.updateConfigOnMouseEvent(e);
 
@@ -111,12 +108,14 @@ var app = app || {};
 
         // Render the drawpad into the canvas's ctx
         render(dt) {
-            this.pattern.draw(this.draftCanvasCtx, dt);
+            this.pattern.draw(this.patternCtx, dt);
 
-            this.filter.draw(this.draftCanvasCtx, dt);
+            this.filter.draw(this.patternCtx, this.filterCtx, dt);
 
-            this.mainCanvasCtx.drawImage(this.draftCanvas, 0, 0);
-            Helper.clearCanvas(this.draftCanvasCtx);
+            this.renderCanvasCtx.drawImage(this.filterCtx.canvas, 0, 0);
+
+            Helper.clearCanvas(this.patternCtx);
+            Helper.clearCanvas(this.filterCtx);
         }
 
     };

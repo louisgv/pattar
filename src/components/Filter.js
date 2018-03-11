@@ -43,12 +43,12 @@ var app = app || {};
         }
 
         // Draw the filter into the ctx
-        draw(ctx, dt) {
+        draw(srcCtx, dstCtx, dt) {
             this.filterInstances.forEach(instance => {
                 if (instance.disabled) {
                     return;
                 }
-                instance.draw(ctx, dt);
+                instance.draw(srcCtx, dstCtx, dt);
             });
         }
 

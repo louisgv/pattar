@@ -31,12 +31,8 @@ canvas {
 }
 
 #main-canvas {
-    z-index: 0;
-}
-
-#draft-canvas {
     cursor: pointer;
-    z-index: 1;
+    z-index: 0;
 }
 
 footer {

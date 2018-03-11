@@ -17,6 +17,9 @@ var app = app || {};
 
     // Label - Enabled
     const value = Object.seal({
+        'passThrough': [
+            'PassThrough', true
+        ],
         'kaleidoscope': [
             'Kaleidoscope', true
         ]
@@ -26,6 +29,9 @@ var app = app || {};
 
     // Class - Default Config
     const defaultValue = Object.seal({
+        'passThrough': [
+            'PassThrough'
+        ],
         'kaleidoscope': [
             'Kaleidoscope',
         ]
@@ -33,6 +39,7 @@ var app = app || {};
 
     // label - config - min - max
     const slider = Object.seal({
+        'passThrough' : [],
         'kaleidoscope': []
     });
 

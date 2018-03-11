@@ -8,9 +8,11 @@
 "use strict";
 var app = app || {};
 
-(function() {
+(function () {
 
-    const {Vector2} = app;
+    const {
+        Vector2
+    } = app;
 
     app.Helper = {
         // Create html element. Code adapted from
@@ -22,14 +24,23 @@ var app = app || {};
             return template.content.firstChild;
         },
 
+        // Create a quick canvas context for temporary drawing.
+        createCtx: () => document.createElement("canvas").getContext('2d'),
+
+        // Set the ctx's canvas to full window inner size
+        setFullsizeCtx(ctx){
+            ctx.canvas.width = window.innerWidth;
+            ctx.canvas.height = window.innerHeight;
+        },
+
         // Toggle all toggle target based on the menu button state
         toggleUIElement(e) {
 
             const shouldDisable = e.target.innerText === 'x';
 
-            e.target.innerHTML = shouldDisable
-                ? '='
-                : 'x';
+            e.target.innerHTML = shouldDisable ?
+                '=' :
+                'x';
 
             Array.from(document.querySelectorAll('.toggle-target')).map((target) => {
                 target.classList.toggle('toggle-disabled');
@@ -42,12 +53,16 @@ var app = app || {};
         getRandomInt: (min, max) => Math.floor(Math.random() * (max - min) + min),
 
         // Asyncronously wait for a duration in ms
-        wait: (duration) => new Promise(function(resolve, reject) {
+        wait: (duration) => new Promise(function (resolve, reject) {
             setTimeout(resolve, duration);
         }),
 
         // Get Mouse position relative to the element
-        getMouse: ({pageX, pageY, target}) => new Vector2(pageX - target.offsetLeft, pageY - target.offsetTop),
+        getMouse: ({
+            pageX,
+            pageY,
+            target
+        }) => new Vector2(pageX - target.offsetLeft, pageY - target.offsetTop),
         // Clear the canvas
         clearCanvas(ctx) {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);

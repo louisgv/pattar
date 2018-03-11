@@ -18,6 +18,8 @@
 		Pattar - Pattern Playground
 	</title>
 
+	<link rel="shortcut icon"
+		  href="./media/icon.png">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700"
 	      rel="stylesheet">
 
@@ -72,14 +74,14 @@
 	        charset="utf-8"></script>
 	<script src="./src/components/basic/Diamond.js"
 		charset="utf-8"></script>
-	
+
 	<script src="./src/components/FilterConfigUI.js"
 		charset="utf-8"></script>
 	<script src="./src/components/PatternConfigUI.js"
 		charset="utf-8"></script>
 	<script src="./src/components/EffectConfigUI.js"
 		charset="utf-8"></script>
-			
+
 	<script src="./src/components/pattern/ShapeGrid.js"
 		charset="utf-8"></script>
 	<script src="./src/components/pattern/ShapeAltGrid.js"
@@ -87,10 +89,12 @@
 
 	<script src="./src/components/filter/Kaleidoscope.js"
 		charset="utf-8"></script>
+	<script src="./src/components/filter/PassThrough.js"
+		charset="utf-8"></script>
 
 	<script src="./src/components/effect/Noise.js"
 		charset="utf-8"></script>
-		
+
 	<script src="./src/components/Pattern.js"
 		charset="utf-8"></script>
 	<script src="./src/components/Effect.js"
@@ -124,7 +128,7 @@
 		<button id="toggleui-button"
 		        class="button interactive"
 			title="Click to Toggle UI">x</button>
-		
+
 		<div class="toggle-target interactive">
 			<div id="pattern-ui-config"
 				class="flex-column">
@@ -134,7 +138,7 @@
 					</span>
 				</label>
 			</div>
-			
+
 			<div id="filter-ui-config"
 				class="flex-column">
 				<label class="generic-label">

@@ -73,48 +73,48 @@ var app = app || {};
         }
 
         // Apply the filter effect
-        draw(ctx, dt) {
+        draw(srcCtx, dstCtx, dt) {
             if (this.currentTime < this.config.timeout) {
                 this.currentTime += dt;
                 return;
             }
             this.currentTime = 0;
 
-            ctx.save();
-            ctx.fillStyle = ctx.createPattern(ctx.canvas, 'repeat');
+            dstCtx.save();
+            dstCtx.fillStyle = dstCtx.createPattern(srcCtx.canvas, 'repeat');
 
             for (let index = 0; index < this.config.slices; index++) {
 
-                ctx.save();
+                dstCtx.save();
 
-                ctx.translate(this.config.center.x, this.config.center.y);
+                dstCtx.translate(this.config.center.x, this.config.center.y);
 
-                ctx.rotate(index * this.config.step);
+                dstCtx.rotate(index * this.config.step);
 
-                ctx.beginPath();
+                dstCtx.beginPath();
 
-                ctx.moveTo(-0.5, -0.5);
-                ctx.arc(0, 0, this.config.radius, this.config.step * -0.51, this.config.step * 0.51);
-                ctx.lineTo(0.5, 0.5);
-                ctx.closePath();
+                dstCtx.moveTo(-0.5, -0.5);
+                dstCtx.arc(0, 0, this.config.radius, this.config.step * -0.51, this.config.step * 0.51);
+                dstCtx.lineTo(0.5, 0.5);
+                dstCtx.closePath();
 
-                ctx.rotate(Global.HALF_PI);
-                ctx.scale(this.config.scale, this.config.scale);
+                dstCtx.rotate(Global.HALF_PI);
+                dstCtx.scale(this.config.scale, this.config.scale);
 
-                ctx.scale([-1, 1][index % 2], 1);
+                dstCtx.scale([-1, 1][index % 2], 1);
 
-                ctx.translate(this.config.offsetX - this.config.center.x, this.config.offsetY);
+                dstCtx.translate(this.config.offsetX - this.config.center.x, this.config.offsetY);
 
-                ctx.rotate(this.config.offsetRotation);
-                ctx.scale(this.config.offsetScale, this.config.offsetScale);
+                dstCtx.rotate(this.config.offsetRotation);
+                dstCtx.scale(this.config.offsetScale, this.config.offsetScale);
 
-                ctx.fill();
+                dstCtx.fill();
 
-                ctx.restore();
+                dstCtx.restore();
             }
 
 
-            ctx.restore();
+            dstCtx.restore();
         }
     };
 }());
