@@ -44,19 +44,27 @@ var app = app || {};
                 target.classList.toggle('toggle-disabled');
             });
         },
+
+        // Make enum from flat array
+        makeEnum: (items) => items.reduce((p, c) => {
+            p[c] = c;
+            return p;
+        }, {}),
+
+        // Clamp value between min and max
         clamp(val, min, max) {
             return Math.max(min, Math.min(max, val));
         },
+
         // Return a random between min and max
         getRandomInt: (min, max) => Math.floor(Math.random() * (max - min) + min),
 
         // Asyncronously wait for a duration in ms
-        wait: (duration) => new Promise(function(resolve, reject) {
-            setTimeout(resolve, duration);
-        }),
+        wait: (duration) => new Promise((resolve) => setTimeout(() => resolve(), duration)),
 
         // Get Mouse position relative to the element
         getMouse: ({pageX, pageY, target}) => new Vector2(pageX - target.offsetLeft, pageY - target.offsetTop),
+
         // Clear the canvas
         clearCanvas(ctx) {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);

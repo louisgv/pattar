@@ -44,16 +44,24 @@ var app = app || {};
         ]
     });
 
-    const shape = Global.BASIC_SHAPE;
+    const shapeSelect = [
+        'Shape',
+        'shape',
+        Helper.makeEnum(Global.BASIC_SHAPES),
+        Global.BASIC_SHAPES
+    ];
 
-    const shapes = Object.keys(shape);
-
-    const shapeSelect = ['Shape', 'shape'];
+    const backgroundSelect = [
+        'Source',
+        'src',
+        Helper.makeEnum(Global.BACKGROUND_IMAGES),
+        Global.BACKGROUND_IMAGES
+    ];
 
     const select = Object.seal({
         'shapeGrid': [shapeSelect],
         'shapeAltGrid': [shapeSelect],
-        'backgroundImage': []
+        'backgroundImage': [backgroundSelect]
     });
 
     const values = Object.keys(value);
@@ -61,8 +69,6 @@ var app = app || {};
     app.PatternConfig = {
         value,
         values,
-        shape,
-        shapes,
         select,
         defaultValue
     };

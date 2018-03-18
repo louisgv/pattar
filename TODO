@@ -1,5 +1,32 @@
-- Investigate background pattern layer, routing drop event, as well as preload an image
-- Investigate extending options for kaleidoscope
+TODO:
+
+- Investigate using checkbox to halt animation
+
+- Using checkbox to halt mouse interaction
+
+- Implement drop box to choose pre-loadeded images
+
 - Refine alternative grid pattern
+
+- Using UI button to save images
+
+- Using UI button to open file dialog for choosing an image file
+
 - Investigate saving canvas
-- Adding sprite movement based on deltatime.... <-
+
+- Duplicate the current alt grid and name is ShapeShiftedGrid
+
+- Create an overlay with instruction on how to use Pattar
+
+REVIEW:
+- Investigate extending options for kaleidoscope
+
+- Investigate background pattern layer, routing drop event, as well as preload images
+
+- Adding movement based on deltatime.... <-
+
+- Render by width or height of image, or stretch it
+    https://www.w3schools.com/tags/canvas_drawimage.asp
+
+XXX:
+- BUY DEODORANT

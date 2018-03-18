@@ -27,6 +27,7 @@ var app = app || {};
 
         /** Update config based on canvas */
         updateConfig(canvas) {
+            this.size = canvas.size;
 
             this.updateCache();
         }
@@ -42,7 +43,7 @@ var app = app || {};
         draw(ctx) {
             ctx.save();
 
-            ctx.drawImage(this.imageCache, 0, 0);
+            ctx.drawImage(this.imageCache, 0, 0, this.size.x, this.size.y);
 
             ctx.restore();
         }

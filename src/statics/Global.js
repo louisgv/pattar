@@ -27,14 +27,15 @@ app.Global = Object.freeze({
         DOWN: 40,
         SPACE: 32,
         SHIFT: 16,
+        ESC: 27,
         CTRL: 17,
         s: 83
     },
 
-    BASIC_SHAPE: {
-        Circle: 'Circle',
-        Square: 'Square',
-        Triangle: 'Triangle',
-        Diamond: 'Diamond'
-    }
+    BASIC_SHAPES: [
+        'Circle',
+        'Square',
+        'Triangle',
+        'Diamond'
+    ]
 });

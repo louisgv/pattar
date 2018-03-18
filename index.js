@@ -50,6 +50,10 @@ var app = app || {};
                     }
                     break;
                 }
+            case 'O':
+                {
+                    main.toggleUIButton.dispatchEvent(new Event('click'));
+                }
             default:
         }
     });

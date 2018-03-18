@@ -39,9 +39,15 @@ var app = app || {};
 
     // label - config - min - max
     const slider = Object.seal({
-        'passThrough' : [],
         'kaleidoscope': [
-            ['Slices', 'slices', 3, 30]
+            ['Slices', 'slices', 0, 100],
+            ['Zoom', 'zoom', 0, 10]
+        ]
+    });
+
+    const checkbox = Object.seal({
+        'kaleidoscope': [
+            [['animateKey'], 'offsetRotation',  ]
         ]
     });
 

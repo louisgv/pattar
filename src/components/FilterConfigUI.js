@@ -41,18 +41,21 @@ var app = app || {};
 
             const filterConfig = instance.config;
 
-            FilterConfig.slider[f].forEach(([sliderLabel, sliderConfig, min, max]) => {
-                const delta = max - min;
-                const defaultValue = (filterConfig[sliderConfig] - min ) /delta;
-                
-                const sliderEl = Interface.generateSlider(sliderLabel, `${sliderConfig}-slider`, (e) => {
-                    filterConfig[sliderConfig] = parseFloat(e.target.value) * delta + min;
-                    
-                    onChange();
-                }, defaultValue, 'margin-right');
+            if (FilterConfig.slider[f]) {
+                FilterConfig.slider[f].forEach(([sliderLabel, sliderConfig, min, max]) => {
+                    const delta = max - min;
+                    const defaultValue = (filterConfig[sliderConfig] - min ) /delta;
 
-                bodyEl.appendChild(sliderEl);
-            });
+                    const sliderEl = Interface.generateSlider(sliderLabel, `${sliderConfig}-slider`, (e) => {
+                        filterConfig[sliderConfig] = parseFloat(e.target.value) * delta + min;
+
+                        onChange();
+                    }, defaultValue, 'margin-right');
+
+                    bodyEl.appendChild(sliderEl);
+                });
+            }
+
 
             return bodyEl;
         }
