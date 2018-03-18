@@ -40,13 +40,14 @@ var app = app || {};
         updateConfig(canvas) {
             this.config.radius = Math.min(canvas.center.x * 2 / 3, canvas.center.y * 2 / 3);
 
-            this.config.scale = this.config.zoom * (this.config.radius / Math.min(canvas.width, canvas.height));
-
             this.config.center = canvas.center;
 
-            this.config.step = Global.TWO_PI / this.config.slices;
+            this.config.scale = this.config.zoom * (this.config.radius / Math.min(canvas.width, canvas.height));
+
+            this.refresh();
         }
 
+        // React to mouse event 
         updateConfigOnMouseEvent(e) {
             const dx = e.pageX / window.innerWidth;
             const dy = e.pageY / window.innerHeight;
@@ -70,15 +71,19 @@ var app = app || {};
         // Refresh timeout
         refresh() {
             this.currentTime = this.config.timeout;
+
+            this.config.step = Global.TWO_PI / this.config.slices;
+
+            this.config.arcStep = this.config.step * 0.51;
         }
 
         // Apply the filter effect
         draw(srcCtx, dstCtx, dt) {
-            if (this.currentTime < this.config.timeout) {
-                this.currentTime += dt;
-                return;
-            }
-            this.currentTime = 0;
+            // if (this.currentTime < this.config.timeout) {
+            //     this.currentTime += dt;
+            //     return;
+            // }
+            // this.currentTime = 0;
 
             dstCtx.save();
             dstCtx.fillStyle = dstCtx.createPattern(srcCtx.canvas, 'repeat');
@@ -94,7 +99,7 @@ var app = app || {};
                 dstCtx.beginPath();
 
                 dstCtx.moveTo(-0.5, -0.5);
-                dstCtx.arc(0, 0, this.config.radius, this.config.step * -0.51, this.config.step * 0.51);
+                dstCtx.arc(0, 0, this.config.radius, -this.config.arcStep, this.config.arcStep);
                 dstCtx.lineTo(0.5, 0.5);
                 dstCtx.closePath();
 

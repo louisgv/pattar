@@ -1,0 +1,5 @@
+- Investigate background pattern layer, routing drop event, as well as preload an image
+- Investigate extending options for kaleidoscope
+- Refine alternative grid pattern
+- Investigate saving canvas
+- Adding sprite movement based on deltatime.... <-

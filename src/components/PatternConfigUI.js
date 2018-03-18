@@ -41,8 +41,7 @@ var app = app || {};
 
             const patternConfig = instance.config;
 
-            PatternConfig.select[v].forEach(selectLabel => {
-                const selectConfig = selectLabel.toLowerCase();
+            PatternConfig.select[v].forEach(([selectLabel, selectConfig]) => {
                 const selectOptions = PatternConfig[`${selectConfig}s`];
                 const selectDefault = patternConfig[selectConfig];
                 const checkBoxEl = Interface.generateSelect(

@@ -13,14 +13,24 @@ var app = app || {};
 app.Global = Object.freeze({
     HALF_PI: Math.PI / 2,
     TWO_PI: Math.PI * 2,
+
+    BACKGROUND_IMAGES: [
+        'vibe-x.png',
+        'black-white-sky.jpg',
+        'colorful-sky.jpg'
+    ].map((img) => `./media/bgimg/${img}`),
+
     KEYBOARD: {
-        KEY_LEFT: 37,
-        KEY_UP: 38,
-        KEY_RIGHT: 39,
-        KEY_DOWN: 40,
-        KEY_SPACE: 32,
-        KEY_SHIFT: 16
+        LEFT: 37,
+        UP: 38,
+        RIGHT: 39,
+        DOWN: 40,
+        SPACE: 32,
+        SHIFT: 16,
+        CTRL: 17,
+        s: 83
     },
+
     BASIC_SHAPE: {
         Circle: 'Circle',
         Square: 'Square',

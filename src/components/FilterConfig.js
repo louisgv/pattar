@@ -18,7 +18,7 @@ var app = app || {};
     // Label - Enabled
     const value = Object.seal({
         'passThrough': [
-            'PassThrough', true
+            'PassThrough'
         ],
         'kaleidoscope': [
             'Kaleidoscope', true
@@ -40,7 +40,9 @@ var app = app || {};
     // label - config - min - max
     const slider = Object.seal({
         'passThrough' : [],
-        'kaleidoscope': []
+        'kaleidoscope': [
+            ['Slices', 'slices', 3, 30]
+        ]
     });
 
     app.FilterConfig = {

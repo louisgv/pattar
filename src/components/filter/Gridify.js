@@ -1,0 +1,3 @@
+/*
+    This filter adds white grids to the original context
+*/

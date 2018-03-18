@@ -8,7 +8,7 @@
 // An IIFE ("Iffy") - see the notes in mycourses
 "use strict";
 var app = app || {};
-(function () {
+(function() {
     const {
         Vector2,
 
@@ -48,7 +48,6 @@ var app = app || {};
         setupCache() {
             this.renderCanvas.size = new Vector2(window.innerWidth, window.innerHeight);
             this.renderCanvas.center = this.renderCanvas.size.iMul(0.5);
-
 
             Helper.setFullsizeCtx(this.patternCtx);
             Helper.setFullsizeCtx(this.filterCtx);
@@ -106,6 +105,22 @@ var app = app || {};
             this.dragging = false;
         }
 
+        /*  Save the rendered canvas to a PNG
+            https://stackoverflow.com/questions/11112321/how-to-save-canvas-as-png-image
+        */
+        saveToPNG() {
+            // const testImage = this.renderCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+            //
+            // console.log(this.renderCanvas);
+            //
+            // const tempDownload = Helper.createElement(`
+            //     <a href="${testImage}" download="pattar.png"></a>
+            // `);
+            //
+            //
+            // document.body.appendChild(tempDownload);
+        }
+
         // Render the drawpad into the canvas's ctx
         render(dt) {
             this.pattern.draw(this.patternCtx, dt);
@@ -114,8 +129,13 @@ var app = app || {};
 
             this.renderCanvasCtx.drawImage(this.filterCtx.canvas, 0, 0);
 
-            Helper.clearCanvas(this.patternCtx);
-            Helper.clearCanvas(this.filterCtx);
+            // https://stackoverflow.com/questions/11949607/how-to-delete-javascript-canvas#11949681
+            this.patternCtx = null;
+            this.filterCtx = null;
+            this.patternCtx = Helper.createCtx();
+            this.filterCtx = Helper.createCtx();
+            Helper.setFullsizeCtx(this.patternCtx);
+            Helper.setFullsizeCtx(this.filterCtx);
         }
 
     };

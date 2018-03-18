@@ -15,29 +15,46 @@ var app = app || {};
 
     // Label - Enabled
     const value = Object.seal({
-        'shapeGrid': [
-            'Shape Grid', true
+        'backgroundImage': [
+            'Background Image', true
         ],
+        'shapeGrid': ['Shape Grid'],
+        'shapeAltGrid': ['Shape Alternative Grid']
     });
 
     // Class - Default Config
     const defaultValue = Object.seal({
+        'backgroundImage': [
+            'BackgroundImage', {
+                zoom: 0,
+                src: Global.BACKGROUND_IMAGES[0]
+            }
+        ],
         'shapeGrid': [
             'ShapeGrid', {
                 size: 10,
-                shape: 'Diamond',
+                shape: 'Diamond'
             }
         ],
+        'shapeAltGrid': [
+            'ShapeAltGrid', {
+                size: 10,
+                shape: 'Triangle'
+            }
+        ]
     });
 
     const shape = Global.BASIC_SHAPE;
 
     const shapes = Object.keys(shape);
 
-    const select = Object.seal({
-        'shapeGrid': ['Shape']
-    });
+    const shapeSelect = ['Shape', 'shape'];
 
+    const select = Object.seal({
+        'shapeGrid': [shapeSelect],
+        'shapeAltGrid': [shapeSelect],
+        'backgroundImage': []
+    });
 
     const values = Object.keys(value);
 
@@ -47,6 +64,6 @@ var app = app || {};
         shape,
         shapes,
         select,
-        defaultValue,
+        defaultValue
     };
 }());

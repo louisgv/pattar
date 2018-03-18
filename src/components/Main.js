@@ -14,8 +14,13 @@ var app = app || {};
         Random,
         Interface,
         Global,
-        Helper
+        Helper,
+
     } = app;
+
+    const {
+        KEYBOARD
+    } = Global;
 
     app.Main = class {
         constructor() {
@@ -32,6 +37,8 @@ var app = app || {};
         init() {
             this.setupUI();
 
+            this.keyboard.registerCombo('SAVE', [KEYBOARD.CTRL, KEYBOARD.s]);
+
             // start animation loop
             this.update();
         }
@@ -40,19 +47,20 @@ var app = app || {};
          *
          */
         halt() {
+            document.querySelector('#halt-notice').classList.add('enabled');
             this.paused = true;
             cancelAnimationFrame(this.animationID);
             this.update();
-
         }
 
         /** Resume the application
          */
         resume() {
+            document.querySelector('#halt-notice').classList.remove('enabled');
+
             cancelAnimationFrame(this.animationID);
             this.paused = false;
             this.update();
-
         }
 
         /** Setup any caching layer of any module it depends on.
@@ -90,6 +98,17 @@ var app = app || {};
             let dt = this.getDeltaTime();
 
             this.drawpad.render(dt);
+
+            this.lateUpdate();
+        }
+
+        /** Handle user input in late update
+         *
+        */
+        lateUpdate() {
+            if (this.keyboard.isComboUp('SAVE')) {
+                this.drawpad.saveToPNG();
+            }
         }
 
         /** Calculate the delta time

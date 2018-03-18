@@ -5,18 +5,43 @@
     LICENSE: MIT
 */
 
-body {
-    font-family: 'Comfortaa', cursive;
-    background: #eee;
+body, .absolute-full-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+}
+
+body {
+    font-family: 'Comfortaa', cursive;
+    background: #eee;
     margin: 0;
     padding: 0;
 }
+
+.enabled {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}
+
+#halt-notice {
+    position: absolute;
+    background: black;
+    color: white;
+    font-size: 4.5em;
+    z-index: 999;
+    opacity: 0;
+    transform: scale(0);
+    transition: 0.45s;
+    pointer-events: none;
+}
+
 
 #drawpad-container {
     position: absolute;
@@ -54,6 +79,13 @@ footer h4, footer h5 {
     padding: 0.5em 1em;
     margin-top: 0.1em;
 }
+
+@media only screen and (max-width: 648px) {
+    footer {
+        bottom: 3em;
+    }
+}
+
 .interactive {
     pointer-events: auto;
 }

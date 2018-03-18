@@ -13,7 +13,9 @@ var app = app || {};
 app.DropZone = {
     // Apply drag/drop event to an element and ire callback whenever
     // a file is dropped
-    apply(el, callback) {
+    // 'audio.*'
+    // 'image.*'
+    apply(el, callback, blobType = null) {
         el.addEventListener('dragover', (e) => {
             e.stopPropagation();
             e.preventDefault();
@@ -35,9 +37,9 @@ app.DropZone = {
                 return;
             }
 
-            // if (!fileBlob.type.match('audio.*')) {
-            // 	return;
-            // }
+            if (blobType && !fileBlob.type.match(blobType)) {
+            	return;
+            }
 
             // If not image ignore
             callback(fileBlob, {

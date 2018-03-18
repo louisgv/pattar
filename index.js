@@ -9,11 +9,21 @@
 var app = app || {};
 (function() {
 
-    const {Main, Drawpad, Keyboard, Sound} = app;
+    const {
+        Main,
+        Drawpad,
+        Keyboard,
+        Sound,
+        Global,
+        Helper
+    } = app;
 
     const main = new Main();
 
-    window.addEventListener('load', () => {
+    window.addEventListener('load', async () => {
+        // Preload all background images:
+        await Helper.loadImages(Global.BACKGROUND_IMAGES);
+
         main.sound = new Sound();
         main.keyboard = new Keyboard();
         main.drawpad = new Drawpad();
