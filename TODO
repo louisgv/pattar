@@ -10,13 +10,13 @@ TODO:
 
 - Using UI button to open file dialog for choosing an image file
 
-- Investigate saving canvas
-
 - Duplicate the current alt grid and name is ShapeShiftedGrid
 
 - Create an overlay with instruction on how to use Pattar
 
 REVIEW:
+
+- Investigate saving canvas
 
 - Implement drop box to choose pre-loadeded images
 
