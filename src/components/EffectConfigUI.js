@@ -29,7 +29,7 @@ var app = app || {};
             const instance = this.filterInstance[f];
             const [label, isEnabled] = EffectConfig.value[f];
 
-            const bodyEl = Helper.createElement(`<div class="flex-inline-row margin-bottom"></div>`);
+            const bodyEl = Helper.createElement(`<div class="flex-inline-row flex-wrap margin-top-double margin-bottom-double"></div>`);
 
             const toggleEl = Interface.generateCheckBox(label, f, (e) => {
                 instance.disabled = !e.target.checked;
@@ -44,10 +44,10 @@ var app = app || {};
             EffectConfig.slider[f].forEach(([sliderLabel, sliderConfig, min, max]) => {
                 const delta = max - min;
                 const defaultValue = (effectConfig[sliderConfig] - min ) /delta;
-                
+
                 const sliderEl = Interface.generateSlider(sliderLabel, `${sliderConfig}-slider`, (e) => {
                     effectConfig[sliderConfig] = parseFloat(e.target.value) * delta + min;
-                    
+
                     onChange();
                 }, defaultValue, 'margin-right');
 

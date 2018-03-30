@@ -42,7 +42,6 @@ body {
     pointer-events: none;
 }
 
-
 #drawpad-container {
     position: absolute;
     top: 0;
@@ -106,7 +105,6 @@ footer h4, footer h5 {
 
 #controls {
     z-index: 2;
-
     position: absolute;
     top: 0;
     left: 0;
@@ -115,10 +113,16 @@ footer h4, footer h5 {
     flex-direction: column;
     align-items: baseline;
     pointer-events: none;
+    margin: 1em;
 }
 
 #controls button, #now-playing div {
     margin-bottom: 0.1em;
+}
+
+#controls.highlight {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0.5em;
 }
 
 .toggle-target {
@@ -151,8 +155,20 @@ footer h4, footer h5 {
     flex-direction: row;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .margin-bottom {
     margin-bottom: 0.2em;
+}
+
+.margin-bottom-double {
+    margin-bottom: 0.5em;
+}
+
+.margin-top-double {
+    margin-top: 0.5em;
 }
 
 .margin-right {

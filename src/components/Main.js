@@ -103,15 +103,13 @@ var app = app || {};
             // this schedules a call to the update() method in 1/60 seconds
             this.animationID = requestAnimationFrame(() => this.update());
 
-            if (this.paused) {
+            if (this.paused || !this.drawpad) {
                 return;
             }
 
             let dt = this.getDeltaTime();
 
-            if (this.drawpad) {
-                this.drawpad.render(dt);
-            }
+            this.drawpad.render(dt);
 
             this.lateUpdate();
         }
@@ -120,6 +118,10 @@ var app = app || {};
          *
         */
         lateUpdate() {
+            if (!this.keyboard) {
+                return;
+            }
+
             if (this.keyboard.isComboUp('SAVE')) {
                 this.drawpad.saveToPNG();
             }

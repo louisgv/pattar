@@ -45,10 +45,15 @@ var app = app || {};
         ]
     });
 
+    // label - path within config - config
     const checkbox = Object.seal({
         'kaleidoscope': [
-            [['animateKey'], 'offsetRotation',  ]
-        ]
+            ['Rotate', ['animateKey'], 'offsetRotation'],
+            ['Shift X', ['animateKey'], 'offsetX'],
+            ['Shift Y', ['animateKey'], 'offsetY'],
+            ['Animate', [], 'animate'],
+            ['Mouse Track', [], 'mouseAnim']
+        ],
     });
 
     app.FilterConfig = {
@@ -56,5 +61,6 @@ var app = app || {};
         values,
         defaultValue,
         slider,
+        checkbox,
     };
 }());

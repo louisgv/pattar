@@ -24,6 +24,10 @@ var app = app || {};
     app.Drawpad = class {
         constructor() {
             this.dragging = false;
+            this.downloadEl = Helper.createElement(`
+                <a href="#" class="hidden"></a>
+            `);
+
             this.renderCanvas = Helper.createElement(`
                 <canvas id="main-canvas"></canvas>
             `);
@@ -32,6 +36,7 @@ var app = app || {};
             this.container = document.querySelector('#drawpad-container');
 
             this.container.appendChild(this.renderCanvas);
+            this.container.appendChild(this.downloadEl);
 
             this.pattern = new Pattern();
             this.patternConfigUI = new PatternConfigUI(this.pattern);
@@ -109,16 +114,9 @@ var app = app || {};
             https://stackoverflow.com/questions/11112321/how-to-save-canvas-as-png-image
         */
         saveToPNG() {
-            // const testImage = this.renderCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-            //
-            // console.log(this.renderCanvas);
-            //
-            // const tempDownload = Helper.createElement(`
-            //     <a href="${testImage}" download="pattar.png"></a>
-            // `);
-            //
-            //
-            // document.body.appendChild(tempDownload);
+            this.downloadEl.download = 'pattar.png';
+            this.downloadEl.href = this.renderCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            this.downloadEl.click();
         }
 
         // Render the drawpad into the canvas's ctx

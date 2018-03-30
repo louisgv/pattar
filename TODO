@@ -4,8 +4,6 @@ TODO:
 
 - Using checkbox to halt mouse interaction
 
-- Implement drop box to choose pre-loadeded images
-
 - Refine alternative grid pattern
 
 - Using UI button to save images
@@ -19,6 +17,9 @@ TODO:
 - Create an overlay with instruction on how to use Pattar
 
 REVIEW:
+
+- Implement drop box to choose pre-loadeded images
+
 - Investigate extending options for kaleidoscope
 
 - Investigate background pattern layer, routing drop event, as well as preload images
@@ -27,6 +28,3 @@ REVIEW:
 
 - Render by width or height of image, or stretch it
     https://www.w3schools.com/tags/canvas_drawimage.asp
-
-XXX:
-- BUY DEODORANT

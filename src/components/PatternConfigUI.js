@@ -10,13 +10,8 @@
 "use strict";
 var app = app || {};
 
-(function () {
-    const {
-        PatternConfig,
-        Interface,
-        Helper,
-        Global
-    } = app;
+(function() {
+    const {PatternConfig, Interface, Helper, Global} = app;
 
     app.PatternConfigUI = class {
 
@@ -30,7 +25,7 @@ var app = app || {};
 
             const [label, isEnabled] = PatternConfig.value[v];
 
-            const bodyEl = Helper.createElement(`<div class="flex-inline-row margin-bottom"></div>`);
+            const bodyEl = Helper.createElement(`<div class="flex-inline-row flex-wrap margin-top-double margin-bottom-double"></div>`);
 
             const patternToggleEl = Interface.generateCheckBox(label, v, (e) => {
                 instance.disabled = !e.target.checked;
@@ -41,22 +36,19 @@ var app = app || {};
 
             const patternConfig = instance.config;
 
-            PatternConfig.select[v].forEach(([selectLabel, selectConfig, selectOption, selectOptions]) => {
-                const selectDefault = patternConfig[selectConfig];
-                const checkBoxEl = Interface.generateSelect(
-                    `Select value for ${selectLabel}`,
-                    selectOptions,
-                    selectDefault, (e) => {
+            if (PatternConfig.select[v]) {
+                PatternConfig.select[v].forEach(([selectLabel, selectConfig, selectOption, selectOptions]) => {
+                    const selectDefault = patternConfig[selectConfig];
+                    const checkBoxEl = Interface.generateSelect(`Select value for ${selectLabel}`, selectOptions, selectDefault, (e) => {
                         // TODO: make alpha tweakable
                         patternConfig[selectConfig] = selectOption[e.target.value];
                         instance.updateCache();
                         onChange();
                     });
 
-                bodyEl.appendChild(checkBoxEl);
-
-            });
-
+                    bodyEl.appendChild(checkBoxEl);
+                });
+            }
 
             return bodyEl;
         }

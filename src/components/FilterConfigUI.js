@@ -29,7 +29,7 @@ var app = app || {};
             const instance = this.filterInstance[f];
             const [label, isEnabled] = FilterConfig.value[f];
 
-            const bodyEl = Helper.createElement(`<div class="flex-inline-row margin-bottom"></div>`);
+            const bodyEl = Helper.createElement(`<div class="flex-inline-row flex-wrap margin-top-double margin-bottom-double"></div>`);
 
             const filterToggleEl = Interface.generateCheckBox(label, f, (e) => {
                 instance.disabled = !e.target.checked;
@@ -56,6 +56,17 @@ var app = app || {};
                 });
             }
 
+            if (FilterConfig.checkbox[f]) {
+                FilterConfig.checkbox[f].forEach(([checkBoxLabel, path, key]) => {
+                    const checkBoxConfig = Helper.traceProp(path, filterConfig);
+
+                    const checkBoxEl = Interface.generateCheckBox(checkBoxLabel, `${f}-${key}`, (e) => {
+                        checkBoxConfig[key] = e.target.checked;
+                    }, checkBoxConfig[key], 'tool-col');
+
+                    bodyEl.appendChild(checkBoxEl);
+                });
+            }
 
             return bodyEl;
         }
