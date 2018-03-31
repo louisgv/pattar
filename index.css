@@ -164,20 +164,28 @@ footer h4, footer h5 {
 }
 
 .margin-bottom-double {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
 }
 
 .margin-top-double {
-    margin-top: 0.5em;
+    margin-top: 0.4em;
+}
+
+.margin-top-tripple {
+    margin-top: 0.6em;
 }
 
 .margin-right {
     margin-right: 0.2em;
 }
 
+.padding-bottom {
+    padding-bottom: 0.2em;
+}
+
 .generic-label {
-    background: #eee;
-    color: #333;
+    background: #333;
+    color:  #eee;
     display: flex;
     justify-content: center;
     height: 25px;

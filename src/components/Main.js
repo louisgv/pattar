@@ -8,19 +8,11 @@
 // An IIFE ("Iffy") - see the notes in mycourses
 "use strict";
 var app = app || {};
-(function () {
+(function() {
 
-    const {
-        Random,
-        Interface,
-        Global,
-        Helper,
+    const {Random, Interface, Global, Helper} = app;
 
-    } = app;
-
-    const {
-        KEYBOARD
-    } = Global;
+    const {KEYBOARD} = Global;
 
     app.Main = class {
         constructor() {
@@ -81,6 +73,8 @@ var app = app || {};
         setupUI() {
             this.toggleUIButton = document.querySelector('#toggleui-button');
             this.toggleUIButton.addEventListener('click', Helper.toggleUIElement);
+
+            document.querySelector('#save-button').addEventListener('click', () => this.drawpad.saveToPNG());
 
             this.drawpad.setupUI();
 

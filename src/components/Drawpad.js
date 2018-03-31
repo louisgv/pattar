@@ -15,8 +15,11 @@ var app = app || {};
         Pattern,
         Filter,
 
+        Emitter,
+
         PatternConfigUI,
         FilterConfigUI,
+        EmitterConfigUI,
 
         Helper
     } = app;
@@ -45,6 +48,10 @@ var app = app || {};
             this.filter = new Filter();
             this.filterConfigUI = new FilterConfigUI(this.filter);
             this.filterCtx = Helper.createCtx();
+
+            this.emitter = new Emitter();
+            this.emitter.createParticles(new Vector2(0, 0));
+            this.emitterConfigUI = new EmitterConfigUI(this.emitter);
 
             this.setupCache();
         }
@@ -75,6 +82,8 @@ var app = app || {};
                 this.filter.refresh();
             });
 
+            this.emitterConfigUI.mount(document.querySelector('#emitter-ui-config'), ()=>{});
+
             this.renderCanvas.addEventListener('mousedown', (e) => this.onMouseDownCanvas(e));
             this.renderCanvas.addEventListener('mousemove', (e) => this.onMouseMoveCanvas(e));
             this.renderCanvas.addEventListener('mouseup', (e) => this.onMouseUpCanvas(e));
@@ -88,7 +97,11 @@ var app = app || {};
         }
 
         onMouseMoveCanvas(e) {
+            const mouse = Helper.getMouse(e);
+
             Helper.clearCanvas(this.renderCanvasCtx);
+
+            this.emitter.updateAndDraw(this.renderCanvasCtx, mouse);
 
             this.filter.kaleidoscope.updateConfigOnMouseEvent(e);
 
@@ -96,12 +109,11 @@ var app = app || {};
                 return;
             }
 
-            const mouse = Helper.getMouse(e);
         }
 
         onMouseUpCanvas(e) {
-
             this.dragging = false;
+            document.querySelector('#kaleidoscope-animate').dispatchEvent(new MouseEvent('click', {bubbles: true}));
         }
 
         // if the user drags out of the canvas
@@ -117,6 +129,7 @@ var app = app || {};
             this.downloadEl.download = 'pattar.png';
             this.downloadEl.href = this.renderCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
             this.downloadEl.click();
+            this.download.href = "";
         }
 
         // Render the drawpad into the canvas's ctx

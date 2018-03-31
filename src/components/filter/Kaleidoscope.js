@@ -96,7 +96,7 @@ var app = app || {};
             // this.currentTime = 0;
 
             if (this.config.animate) {
-                const easedDelta = dt;
+                const easedDelta = dt * this.config.ease;
                 this.config.animateKeys.forEach((k) => {
                     if (this.config.animateKey[k]) {
                         this.config[k] += easedDelta;

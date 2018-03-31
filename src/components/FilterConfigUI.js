@@ -41,6 +41,18 @@ var app = app || {};
 
             const filterConfig = instance.config;
 
+            if (FilterConfig.checkbox[f]) {
+                FilterConfig.checkbox[f].forEach(([checkBoxLabel, path, key]) => {
+                    const checkBoxConfig = Helper.traceProp(path, filterConfig);
+
+                    const checkBoxEl = Interface.generateCheckBox(checkBoxLabel, `${f}-${key}`, (e) => {
+                        checkBoxConfig[key] = e.target.checked;
+                    }, checkBoxConfig[key], 'margin-right padding-bottom');
+
+                    bodyEl.appendChild(checkBoxEl);
+                });
+            }
+
             if (FilterConfig.slider[f]) {
                 FilterConfig.slider[f].forEach(([sliderLabel, sliderConfig, min, max]) => {
                     const delta = max - min;
@@ -53,18 +65,6 @@ var app = app || {};
                     }, defaultValue, 'margin-right');
 
                     bodyEl.appendChild(sliderEl);
-                });
-            }
-
-            if (FilterConfig.checkbox[f]) {
-                FilterConfig.checkbox[f].forEach(([checkBoxLabel, path, key]) => {
-                    const checkBoxConfig = Helper.traceProp(path, filterConfig);
-
-                    const checkBoxEl = Interface.generateCheckBox(checkBoxLabel, `${f}-${key}`, (e) => {
-                        checkBoxConfig[key] = e.target.checked;
-                    }, checkBoxConfig[key], 'tool-col');
-
-                    bodyEl.appendChild(checkBoxEl);
                 });
             }
 

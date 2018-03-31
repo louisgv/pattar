@@ -19,7 +19,7 @@
 	</title>
 
 	<link rel="shortcut icon"
-		  href="./media/icon.png">
+	      href="./media/icon.png">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700"
 	      rel="stylesheet">
 
@@ -60,11 +60,13 @@
 	<script src="./src/statics/Interface.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/FilterConfig.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 	<script src="./src/components/PatternConfig.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 	<script src="./src/components/EffectConfig.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
+	<script src="./src/components/EmitterConfig.js"
+	        charset="utf-8"></script>
 
 	<script src="./src/components/basic/Square.js"
 	        charset="utf-8"></script>
@@ -73,35 +75,39 @@
 	<script src="./src/components/basic/Triangle.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/basic/Diamond.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 
 	<script src="./src/components/FilterConfigUI.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 	<script src="./src/components/PatternConfigUI.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 	<script src="./src/components/EffectConfigUI.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
+	<script src="./src/components/EmitterConfigUI.js"
+	        charset="utf-8"></script>
 
 	<script src="./src/components/pattern/ShapeGrid.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 	<script src="./src/components/pattern/ShapeAltGrid.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 	<script src="./src/components/pattern/BackgroundImage.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 
 	<script src="./src/components/filter/Kaleidoscope.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 	<script src="./src/components/filter/PassThrough.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 
 	<script src="./src/components/effect/Noise.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 
 	<script src="./src/components/Pattern.js"
-		charset="utf-8"></script>
+	        charset="utf-8"></script>
 	<script src="./src/components/Effect.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/Filter.js"
+	        charset="utf-8"></script>
+	<script src="./src/components/Emitter.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/Keyboard.js"
 	        charset="utf-8"></script>
@@ -117,7 +123,8 @@
 </head>
 
 <body>
-	<div id="halt-notice" class="absolute-full-screen">
+	<div id="halt-notice"
+	     class="absolute-full-screen">
 		- PAUSED -
 	</div>
 
@@ -128,15 +135,21 @@
 		pattar
 	</h1>
 
-	<div id="controls" class="highlight">
+	<div id="controls"
+	     class="highlight">
 
 		<button id="toggleui-button"
 		        class="button interactive"
-			title="Click to Toggle UI">x</button>
+		        title="Click to Toggle UI">x</button>
 
 		<div class="toggle-target interactive">
+			<button id="save-button"
+			        class="button"
+			        title="Click to Save the pattern">
+				Save
+			</button>
 			<div id="pattern-ui-config"
-				class="flex-column">
+			     class="flex-column margin-top-tripple">
 				<label class="generic-label">
 					<span>
 						Pattern
@@ -145,12 +158,21 @@
 			</div>
 
 			<div id="filter-ui-config"
-				class="flex-column">
+			     class="flex-column margin-top-tripple">
 				<label class="generic-label">
 					<span>
 						Filter
 					</span>
 				</label>
+			</div>
+
+			<div id="emitter-ui-config"
+			     class="flex-column margin-top-tripple">
+				 <label class="generic-label">
+ 					<span>
+ 						Emitter
+ 					</span>
+ 				</label>
 			</div>
 		</div>
 

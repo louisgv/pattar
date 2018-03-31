@@ -26,9 +26,11 @@ var app = app || {};
         // Clamp value between min and max
         clamp: (val, min, max) => Math.max(min, Math.min(max, val)),
 
-        // Return a random between min and max
+        // Return a random int between min and max
         getRandomInt: (min, max) => Math.floor(Math.random() * (max - min) + min),
 
+        // Return a random float between min and max
+        getRandom: (min, max) => Math.random() * (max - min) + min,
 
         // Get Mouse position relative to the element
         getMouse: ({pageX, pageY, target}) => new Vector2(pageX - target.offsetLeft, pageY - target.offsetTop),

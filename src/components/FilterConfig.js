@@ -41,7 +41,8 @@ var app = app || {};
     const slider = Object.seal({
         'kaleidoscope': [
             ['Slices', 'slices', 0, 100],
-            ['Zoom', 'zoom', 0, 10]
+            ['Zoom', 'zoom', 0, 10],
+            ['Speed', 'ease', 0, 2.0]
         ]
     });
 
