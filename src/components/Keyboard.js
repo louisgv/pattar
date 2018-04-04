@@ -9,6 +9,7 @@
 "use strict";
 var app = app || {};
 (function() {
+    const {Global} = app;
 
     app.Keyboard = class {
         constructor() {
@@ -19,22 +20,30 @@ var app = app || {};
         registerCombo(name, keys) {
             this.combo[name] = {
                 keys,
-                isDown: false
+                pressing: false,
             };
         }
 
+        isComboPressing(name) {
+            return this.combo[name].pressing;
+        }
+
         isComboDown(name) {
-            return this.combo[name].isDown = this.areKeysDown(this.combo[name].keys);
+            if (!this.areKeysDown(this.combo[name].keys) || this.isComboPressing(name)) {
+                return false;
+            }
+
+            return this.combo[name].pressing = true;
         }
 
         isComboUp(name) {
-            if (!this.combo[name].isDown) {
-                this.combo[name].isDown = this.areKeysDown(this.combo[name].keys);
+            if (!this.combo[name].pressing) {
+                this.combo[name].pressing = this.areKeysDown(this.combo[name].keys);
                 return false;
             }
 
             if (!this.areKeysDown(this.combo[name].keys)) {
-                this.combo[name].isDown = false;
+                this.combo[name].pressing = false;
                 return true;
             }
         }
@@ -53,7 +62,9 @@ var app = app || {};
 
         onKeyDown(e) {
             e.preventDefault();
-            console.log("keydown=" + e.keyCode);
+            if (Global.DEBUG) {
+                console.log("keydown=" + e.keyCode);
+            }
             this.pressing[e.keyCode] = true;
         }
 

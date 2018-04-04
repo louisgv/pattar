@@ -35,6 +35,8 @@ var app = app || {};
 
             this.keyboard.registerCombo('SAVE', [KEYBOARD.CTRL, KEYBOARD.s]);
 
+            this.keyboard.registerCombo('REC', [KEYBOARD.CTRL, KEYBOARD.v]);
+
             // start animation loop
             this.update();
         }
@@ -43,7 +45,9 @@ var app = app || {};
          *
          */
         halt() {
-            document.querySelector('#halt-notice').classList.add('enabled');
+            if (!Global.DEBUG) {
+                document.querySelector('#halt-notice').classList.add('enabled');
+            }
 
             this.paused = true;
             cancelAnimationFrame(this.animationID);
@@ -53,7 +57,9 @@ var app = app || {};
         /** Resume the application
          */
         resume() {
-            document.querySelector('#halt-notice').classList.remove('enabled');
+            if (!Global.DEBUG) {
+                document.querySelector('#halt-notice').classList.remove('enabled');
+            }
 
             cancelAnimationFrame(this.animationID);
             this.paused = false;
@@ -76,6 +82,19 @@ var app = app || {};
 
             document.querySelector('#save-button').addEventListener('click', () => this.drawpad.saveToPNG());
 
+            document.querySelector('#record-button').addEventListener('click', (e) => {
+
+                if (e.target.isRecording) {
+                    e.target.isRecording = false;
+                    e.target.innerHTML = "Record WebM";
+                    this.drawpad.stopSaveToWebM();
+                } else {
+                    e.target.isRecording = true;
+                    e.target.innerHTML = "Stop Record WebM";
+                    this.drawpad.startSaveToWebM();
+                }
+            });
+
             this.drawpad.setupUI();
 
             this.lateInit();
@@ -85,9 +104,9 @@ var app = app || {};
          *
          */
         async lateInit() {
-            await Helper.wait(900);
-
-            this.toggleUIButton.dispatchEvent(new Event('click'));
+            // await Helper.wait(3600);
+            //
+            // this.toggleUIButton.dispatchEvent(new Event('click'));
         }
 
         /** Update loop for animation
@@ -114,6 +133,14 @@ var app = app || {};
         lateUpdate() {
             if (!this.keyboard) {
                 return;
+            }
+
+            if (this.keyboard.isComboDown('REC')) {
+                this.drawpad.startSaveToWebM();
+            }
+
+            if (this.keyboard.isComboUp('REC')) {
+                this.drawpad.stopSaveToWebM();
             }
 
             if (this.keyboard.isComboUp('SAVE')) {

@@ -59,6 +59,21 @@ canvas {
     z-index: 0;
 }
 
+#instruction-left {
+    position: absolute;
+    bottom: 4.5em;
+    left: 2.5em;
+    font-family: monospace;
+}
+
+#instruction-right {
+    text-align: right;
+    position: absolute;
+    bottom: 5.4em;
+    right: 2.5em;
+    font-family: monospace;
+}
+
 footer {
     position: absolute;
     background: #eee;

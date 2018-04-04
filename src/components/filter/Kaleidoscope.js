@@ -20,8 +20,8 @@ var app = app || {};
         constructor(config = {
             offsetRotation: 0.0,
             offsetScale: 1.0,
-            offsetX: 0,
-            offsetY: 0,
+            offsetX: 0.0,
+            offsetY: 0.0,
             radius: 450,
             slices: 36,
             zoom: 1.0,
@@ -99,7 +99,11 @@ var app = app || {};
                 const easedDelta = dt * this.config.ease;
                 this.config.animateKeys.forEach((k) => {
                     if (this.config.animateKey[k]) {
-                        this.config[k] += easedDelta;
+                        if (k=== 'offsetRotation') {
+                            this.config[k] += easedDelta;
+                        } else {
+                            this.config[k] += this.config.ease;
+                        }
                     }
                 });
             }

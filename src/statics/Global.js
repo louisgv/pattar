@@ -11,6 +11,8 @@
 var app = app || {};
 
 app.Global = Object.freeze({
+    // Change this to false on production:
+    DEBUG: window.location.host === 'localhost:3000',
     HALF_PI: Math.PI / 2,
     TWO_PI: Math.PI * 2,
 
@@ -29,7 +31,8 @@ app.Global = Object.freeze({
         SHIFT: 16,
         ESC: 27,
         CTRL: 17,
-        s: 83
+        s: 83,
+        v: 86
     },
 
     BASIC_SHAPES: [

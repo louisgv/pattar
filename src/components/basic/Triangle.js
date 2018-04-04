@@ -12,25 +12,24 @@ var app = app || {};
 
 (function() {
     const {Vector2} = app;
-    app.Triangle = class {
-        constructor(pos = new Vector2(), size = 1, rotation = 0) {
-            this.pos = pos;
-            this.size = size;
-            this.rotation = rotation;
-        }
-        // Set the size of the trangle
-        setSize(size) {
-            this.size = size;
-            return this;
-        }
+    app.Triangle = function Triangle(pos = new Vector2(), size = 1, rotation = 0) {
+        this.pos = pos;
+        this.size = size;
+        this.rotation = rotation;
 
-        setRotation(rotation) {
+        // Set the size of the trangle
+        this.setSize = (size) => {
+            this.size = size;
+            return this;
+        };
+
+        this.setRotation = (rotation) => {
             this.rotation = rotation;
             return this;
-        }
+        };
 
         // Draw the triangle to the context
-        draw(ctx, fillStyle = 'black', strokeStyle = null) {
+        this.draw = (ctx, fillStyle = 'black', strokeStyle = null) => {
             ctx.save();
 
             ctx.fillStyle = fillStyle;
@@ -55,6 +54,6 @@ var app = app || {};
             }
 
             ctx.restore();
-        }
+        };
     };
 }());

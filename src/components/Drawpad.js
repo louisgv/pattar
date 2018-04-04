@@ -21,12 +21,19 @@ var app = app || {};
         FilterConfigUI,
         EmitterConfigUI,
 
+        DrawpadRecorder,
+
+        File,
+        DropZone,
         Helper
     } = app;
 
     app.Drawpad = class {
         constructor() {
             this.dragging = false;
+
+            this.recorder = new DrawpadRecorder();
+
             this.downloadEl = Helper.createElement(`
                 <a href="#" class="hidden"></a>
             `);
@@ -40,6 +47,8 @@ var app = app || {};
 
             this.container.appendChild(this.renderCanvas);
             this.container.appendChild(this.downloadEl);
+
+            DropZone.apply(this.container, (d) => this.handleFileDrop(d), 'image.*');
 
             this.pattern = new Pattern();
             this.patternConfigUI = new PatternConfigUI(this.pattern);
@@ -82,7 +91,7 @@ var app = app || {};
                 this.filter.refresh();
             });
 
-            this.emitterConfigUI.mount(document.querySelector('#emitter-ui-config'), ()=>{});
+            this.emitterConfigUI.mount(document.querySelector('#emitter-ui-config'), () => {});
 
             this.renderCanvas.addEventListener('mousedown', (e) => this.onMouseDownCanvas(e));
             this.renderCanvas.addEventListener('mousemove', (e) => this.onMouseMoveCanvas(e));
@@ -90,12 +99,21 @@ var app = app || {};
             this.renderCanvas.addEventListener('mouseout', (e) => this.onMouseOutCanvas(e));
         }
 
+        async handleFileDrop(fileBlob) {
+            const {result} = await File.read(fileBlob);
+
+            this.pattern.backgroundImage.config.src = result;
+            this.pattern.backgroundImage.updateCache();
+        }
+
+        // handle user mouse down event
         onMouseDownCanvas(e) {
             this.dragging = true;
 
             // const mouse = Helper.getMouse(e);
         }
 
+        // handle user mouse move event
         onMouseMoveCanvas(e) {
             const mouse = Helper.getMouse(e);
 
@@ -111,6 +129,7 @@ var app = app || {};
 
         }
 
+        // handle user mouse up event
         onMouseUpCanvas(e) {
             this.dragging = false;
             document.querySelector('#kaleidoscope-animate').dispatchEvent(new MouseEvent('click', {bubbles: true}));
@@ -129,7 +148,28 @@ var app = app || {};
             this.downloadEl.download = 'pattar.png';
             this.downloadEl.href = this.renderCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
             this.downloadEl.click();
-            this.download.href = "";
+            this.downloadEl.href = "";
+        }
+
+        // Start saving to WebM
+        startSaveToWebM() {
+            this.recorder.startRecording(this.renderCanvas);
+        }
+
+        // Stop and export the WebM file
+        async stopSaveToWebM() {
+
+            const blob = await this.recorder.stopRecording();
+            let url = window.URL.createObjectURL(blob);
+
+            this.downloadEl.download = 'pattar.webm';
+
+            this.downloadEl.href = url;
+            this.downloadEl.click();
+
+            await Helper.wait(100);
+            this.downloadEl.href = "";
+            window.URL.revokeObjectURL(url);
         }
 
         // Render the drawpad into the canvas's ctx
@@ -140,7 +180,6 @@ var app = app || {};
 
             this.renderCanvasCtx.drawImage(this.filterCtx.canvas, 0, 0);
 
-            // https://stackoverflow.com/questions/11949607/how-to-delete-javascript-canvas#11949681
             this.patternCtx = null;
             this.filterCtx = null;
             this.patternCtx = Helper.createCtx();

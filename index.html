@@ -101,6 +101,9 @@
 	<script src="./src/components/effect/Noise.js"
 	        charset="utf-8"></script>
 
+	<script src="./src/components/DrawpadRecorder.js"
+	        charset="utf-8"></script>
+
 	<script src="./src/components/Pattern.js"
 	        charset="utf-8"></script>
 	<script src="./src/components/Effect.js"
@@ -146,8 +149,15 @@
 			<button id="save-button"
 			        class="button"
 			        title="Click to Save the pattern">
-				Save
+				Save PNG
 			</button>
+
+			<button id="record-button"
+			        class="button"
+			        title="Click to Record the pattern">
+				Record WebM
+			</button>
+
 			<div id="pattern-ui-config"
 			     class="flex-column margin-top-tripple">
 				<label class="generic-label">
@@ -168,20 +178,30 @@
 
 			<div id="emitter-ui-config"
 			     class="flex-column margin-top-tripple">
-				 <label class="generic-label">
+				<label class="generic-label">
  					<span>
  						Emitter
  					</span>
  				</label>
 			</div>
 		</div>
-
 	</div>
 
+	<h5 class="toggle-target" id="instruction-left">
+		Press P: Pause
+		<br />
+		Press O: Toggle menu
+		<br />
+		Press CTRL + S : Save PNG
+		<br />
+		Press CTRL + V and Hold : Record WebM
+	</h5>
+	<h5 class="toggle-target" id="instruction-right">
+		Mouse click : Toggle animation<br />
+		Hint: Drag and drop your own picture
+	</h5>
+
 	<footer class="toggle-target">
-		<h5>
-			Hint: CTRL+S to Save the Canvas
-		</h5>
 		<h4>
 			COPYLEFT L.A.B ALL RIGHT RELEASED
 		</h4>
